@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Feelms Twitter Observatory</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="css/freelancer.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+     <!-- Morris Charts CSS -->
+    <link href="css/plugins/morris.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+<div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">Feelms!</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#pelicula">Película</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#comentarios">Tweets</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="index.html">Home</a>
+                    </li>
+
+                   
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <section id="pelicula">
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Alien: Covenant</h2> <!-- Titulo de la película {{film.name}} -->
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <!--Grid -->
+            <div class="row">
+              <div class="col-md-5"> <!--Aquí van las características de la película -->
+                <h4>Director: <small>Ridley Scott</small></h4>
+                <h4>Starring: <small>Michael Fassbender, Katherine Waterston, Billy Crudup, Danny McBride, Demián Bichir</small></h4>
+                <h4>Produced by: <small>Ridley Scott, Mark Huffam, Michael Schaefer, David Giler, Walter Hill</small></h4>
+                <h4>Music: <small>Jed Kurzel</small></h4>
+                <h4>Released: <small>May 4, 2017 (Leicester Square), May 19, 2017 (United States)</small></h4>
+                <h4>Plot: <small>In 2104, bound for a remote planet on the far side of the galaxy, the crew of the colony ship Covenant, which includes Walter, an android similar to David, a survivor of the doomed Prometheus expedition, find what they believe to be an uncharted paradise. It soon reveals itself to be a dark and dangerous world inhabited by the original David and monstrous creatures that start to hunt them.</small></h4>
+              
+              <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#trailer">Ver Trailer</button>
+
+                <!-- Modal -->
+                <div id="trailer" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <div class="col-lg-12 text-center">
+                            <h2>Trailer</h2> <!-- Trailer{{}} -->
+                            <hr class="star-primary">
+                        </div>
+                      </div>
+                      <div class="modal-body">
+                        
+                         <<!-- 16:9 aspect ratio -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                          <iframe class="embed-responsive-item" src="https//www.youtube.com/watch?v=svnAD0TApb8"></iframe>
+                        </div>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-info btn-lg" data-dismiss="modal">Cerrar</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+            </div>
+              
+              <div class="col-md-7"> <!--Aquí va el gráfico en D3 de la película -->
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Area Line Graph Example with Tooltips</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="morris-area-chart"></div>
+                    </div>
+                </div>              
+              </div>
+            </div>
+        </div>
+    </section>
+    <section class="success" id="comentarios">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Tweets Destacados</h2> <!-- Titulo de la película {{film.name}} -->
+                    <hr class="star-light">
+                </div>
+            </div>   
+            <div class="list-group">
+              <a href="#" class="list-group-item ">
+                <h4 class="list-group-item-heading"> laslo rojas‏ <small>@amnesico 9 h</small></h4>
+                <p class="list-group-item-text">Excelente #AlienCovenant Le hace honor al espíritu del clásico que precede. Fassbender, denle su doble Oscar ya!</p>
+              </a>
+              <a href="#" class="list-group-item ">
+                <h4 class="list-group-item-heading">  Matias Villar‏ <small>@MatiNickk 5 h</small></h4>
+                <p class="list-group-item-text">He visto críticas no muy buenas de <b>Alien Covenant</b> pero nada me quita el hype por la peli , iré igual al cine a verla</p>
+              </a>
+              <a href="#" class="list-group-item ">
+                <h4 class="list-group-item-heading">  Francisco Javier‏ <small>@creativok 6 h</small></h4>
+                <p class="list-group-item-text">Ohhhh parece que #AlienCovenant está 50/50 en críticas pero levemente mejores que Prometheus, entre que defrauda pero tiene sus momentos...</p>
+              </a>
+              <a href="#" class="list-group-item ">
+                <h4 class="list-group-item-heading"> Licenciada Del Mazo <small>PacoDelMazo 8 may.</small></h4>
+                <p class="list-group-item-text">¿Quién me lleva a ver <b>Alien Covenant</b>? ME URGE</p>
+              </a>
+              <a href="#" class="list-group-item ">
+                <h4 class="list-group-item-heading"> Blog de Cine‏<small>@blogdecine 10 h</small></h4>
+                <p class="list-group-item-text">Crítica sin spoilers de #AlienCovenant: una decepción aún mayor que 'Prometheus' https://www.blogdecine.com/p/98418</p>
+              </a>
+              <button type="button" class="pull-right btn btn-primary">Ver Más</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col col-md-4">
+                        <h3>Location</h3>
+                        <p>3481 Melrose Place
+                            <br>Beverly Hills, CA 90210</p>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>Around the Web</h3>
+                        <ul class="list-inline">
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Google Plus</span><i class="fa fa-fw fa-google-plus"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Twitter</span><i class="fa fa-fw fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Linked In</span><i class="fa fa-fw fa-linkedin"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Dribble</span><i class="fa fa-fw fa-dribbble"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-col col-md-4">
+                        <h3>About Freelancer</h3>
+                        <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; Feelms - 2017
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/freelancer.min.js"></script>
+
+</body>
+
+</html>
