@@ -9,8 +9,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Feelms Twitter Observatory</title>
-
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -24,13 +22,6 @@
 
      <!-- Morris Charts CSS -->
     <link href="css/plugins/morris.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 
@@ -62,9 +53,7 @@
                     </li>
                     <li class="page-scroll">
                         <a href="index.html">Home</a>
-                    </li>
-
-                   
+                    </li>                  
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -72,24 +61,25 @@
         <!-- /.container-fluid -->
     </nav>
 
+    <!-- Datos Película -->
     <section id="pelicula">
         <br>
-        <div class="container">
-            <div class="row">
+        <div class="container"">
+            <div class="row" >
                 <div class="col-lg-12 text-center">
-                    <h2>Alien: Covenant</h2> <!-- Titulo de la película {{film.name}} -->
+                    <h2>ID Pelicula: {{peliculaId}}<!--{{pelicula.name}}--></h2>
                     <hr class="star-primary">
                 </div>
             </div>
             <!--Grid -->
             <div class="row">
-              <div class="col-md-5"> <!--Aquí van las características de la película -->
-                <h4>Director: <small>Ridley Scott</small></h4>
-                <h4>Starring: <small>Michael Fassbender, Katherine Waterston, Billy Crudup, Danny McBride, Demián Bichir</small></h4>
-                <h4>Produced by: <small>Ridley Scott, Mark Huffam, Michael Schaefer, David Giler, Walter Hill</small></h4>
-                <h4>Music: <small>Jed Kurzel</small></h4>
-                <h4>Released: <small>May 4, 2017 (Leicester Square), May 19, 2017 (United States)</small></h4>
-                <h4>Plot: <small>In 2104, bound for a remote planet on the far side of the galaxy, the crew of the colony ship Covenant, which includes Walter, an android similar to David, a survivor of the doomed Prometheus expedition, find what they believe to be an uncharted paradise. It soon reveals itself to be a dark and dangerous world inhabited by the original David and monstrous creatures that start to hunt them.</small></h4>
+              <div class="col-md-5"> 
+                <h4>Director: <small><!--{{pelicula.director}}--></small></h4>
+                <h4>Starring: <small><!--{{pelicula.starring}}--></small></h4>
+                <h4>Produced by: <small><!--{{pelicula.producer}}--></small></h4>
+                <h4>Music: <small><!--{{pelicula.music}}--></small></h4>
+                <h4>Released: <small><!--{{pelicula.release}}--></small></h4>
+                <h4>Plot: <small><!--{{pelicula.plot}}--></small></h4>
               
               <!-- Trigger the modal with a button -->
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#trailer">Ver Trailer</button>
@@ -137,11 +127,13 @@
             </div>
         </div>
     </section>
+
+    <!-- Tweets Destacados -->
     <section class="success" id="comentarios">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Tweets Destacados</h2> <!-- Titulo de la película {{film.name}} -->
+                    <h2>Tweets Destacados</h2>
                     <hr class="star-light">
                 </div>
             </div>   
@@ -170,55 +162,6 @@
             </div>
         </div>
     </section>
-
-
-    <!-- Footer -->
-    <footer class="text-center">
-        <div class="footer-above">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col col-md-4">
-                        <h3>Location</h3>
-                        <p>3481 Melrose Place
-                            <br>Beverly Hills, CA 90210</p>
-                    </div>
-                    <div class="footer-col col-md-4">
-                        <h3>Around the Web</h3>
-                        <ul class="list-inline">
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Google Plus</span><i class="fa fa-fw fa-google-plus"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Twitter</span><i class="fa fa-fw fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Linked In</span><i class="fa fa-fw fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><span class="sr-only">Dribble</span><i class="fa fa-fw fa-dribbble"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-col col-md-4">
-                        <h3>About Freelancer</h3>
-                        <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        Copyright &copy; Feelms - 2017
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
