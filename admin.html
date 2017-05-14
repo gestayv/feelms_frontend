@@ -34,9 +34,10 @@
 <body id="page-top" class="index">
 <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
 
+   
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
-        <div class="container">
+        <div class="container"> 
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -51,7 +52,7 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                    <li class="page-scroll">
+                     <li class="page-scroll">
                         <a href="index.html">Home</a>
                     </li>
                    
@@ -61,6 +62,89 @@
         </div>
         <!-- /.container-fluid -->
     </nav>
+    
+    <section id="optionsA" class="">
+        <div class="container-fluid">
+            <div class="row">
+                
+                <div class="col-lg-12 text-center">
+                    <br>
+                    <h2>Adiminstración</h2> 
+                    <hr class="star-light">
+                </div>
+                <br>
+             <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+              <form class="form-horizontal" role="form">
+                <fieldset>
+
+                  <!-- Form Name -->
+                  <legend>Agregar Película</legend>
+
+                  <!-- Titutlo Pelicula id: title -->
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="title">Título: </label>
+                    <div class="col-sm-10">
+                      <input type="text" id="title" placeholder="Ej: Ciudadano Kane" class="form-control" >
+                    </div>
+                  </div>
+
+                   <!--Director -->
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="name">Director</label>
+                    <div class="col-sm-4">
+                      <input type="text" id="name" placeholder="Nombre" class="form-control">
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="text" id="lastname" placeholder="Apellido" class="form-control">
+                    </div>
+                  </div>
+                  <!--Generos id:gender // luego cambiar por un arreglo de géneros-->
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="genre">Género: </label>
+                    <div class="col-sm-10">
+                      <input type="text" id="genre" placeholder="Ej: Drama de la postguerra en Hungría" class="form-control">
+                    </div>
+                  </div>
+                  <!--Duracion id:length-->
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="length">Duración: </label>
+                    <div class="col-sm-10">
+                      <input type="text" placeholder="Ej: 110" id="length" class="form-control">
+                    </div>
+                  </div>
+
+                  <!-- Fecha Estreno id:release-->
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="release">Fecha Estreno:</label>
+                    <div class="col-sm-10">
+                      <input type="text" id="release" placeholder="YYYY-MM-DDT00:00:00+03:00" class="form-control">
+                    </div>
+                  </div>
+                  <!-- Sinopsis id:sinop-->
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="sinop">Sinopsis:</label>
+                    <div class="col-sm-10">    
+                        <textarea id="sinop" class="form-control" placeholder="Ej: Una historia violenta, pasional, en el que los abrazos se sienten más que el plomo"></textarea>
+                    </div>
+                  </div>
+                  <!--Boton-->
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <div class="pull-right">
+                        <button type="submit" class="btn btn-primary">Añadir</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </fieldset>
+              </form>
+            </div>
+        </div>        
+    </div>     
+        </div>
+    </section>
+    
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
