@@ -26,12 +26,13 @@
 	};
 
 	app.controller("filmController", function($scope, $stateParams, $http) {
+		$scope.peliculaId = $stateParams.peliculaId;
 	    //Entrada : ID Pelicula
 	    //Salida  : Array con los datos de la pelicuka
 	    //Obtener información de la pelicula
 	    $scope.GET_Info_Pelicula = function(id_pelicula){
 
-	    	id_pelicula = 3;
+	    	//id_pelicula = 3;
 	    	//Cambiar al finalizar debug
 	    	//var url = "http://localhost:8080/json_test/info_peli.json";
 	    	var url = urlBase + "/feelms/api/films/" + id_pelicula;
@@ -83,7 +84,7 @@
 
         this.peliculas = peliculas;
 
-		$scope.GET_TOP_Peliculas(3,3);
+		$scope.GET_TOP_Peliculas(5,30);
 	});
 
 	/*app.controller('topController', function($scope) {
