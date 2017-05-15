@@ -10,8 +10,12 @@
   	  $urlRouterProvider.otherwise('/');
 	  $stateProvider
 	    .state('home', {
-	      url: '/',
-	      templateUrl: 'home.html'
+	    	url: '/',
+	      	templateUrl: 'home.html'
+	    })
+	    .state('rank', {
+	    	url: '/',
+	    	templateUrl: 'rank.html'
 	    })
 	    .state('new-rp', {
 	      url: '/film/:peliculaId',
