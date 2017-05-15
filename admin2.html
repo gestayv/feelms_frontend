@@ -121,18 +121,12 @@
                         </div>
                       </div>
                       <!-- Generos id:genres // luego cambiar por un arreglo de géneros-->
-
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="genre">Géneros: </label>
                         <div class="col-sm-10">
-                            <form ng-submit="submit()" ng-controller="formController">
-                              <input type="text" ng-model="text_genre" placeholder="(Para cada valor apretar Enter) Ej: 21, 2" class="form-control" name="text_genre" />
-                              <button type="submit" class="btn btn-primary" ng-click="submitgenres()"></button>
-                            </form>
-
+                          <input type="text" id="genres" placeholder="Ej: Drama de la postguerra en Hungría" class="form-control" ng-model="pelicula.genres" required>
                         </div>
-                      </div>    
-
+                      </div>
                       <!-- Imagen id: imgId -->
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="imgId">Image ID: </label>
@@ -147,20 +141,13 @@
                           <input type="text" id="trailer" placeholder="Ej: www.youtube.com/?asdasd" class="form-control" ng-model="pelicula.trailer">
                         </div>
                       </div>
-
                       <!-- Keywords id:keywords // luego cambiar por un arreglo de keywords-->
                       <div class="form-group">
                         <label class="col-sm-2 control-label" for="keywords">Keywords: </label>
                         <div class="col-sm-10">
-                            <form ng-submit="submit()" ng-controller="formController">
-                              <input type="text" ng-model="text_keywords" placeholder="(Para cada valor apretar Enter) Ej: Horror, Terror" class="form-control" name="text_keywords" />
-                              <button type="submit" class="btn btn-primary" ng-click="submitkeywords()"></button>
-                            </form>
-
+                          <input type="text" id="genres" placeholder="Ej: star wars, yoda, r2d2" class="form-control" ng-model="pelicula.keywords">
                         </div>
-                      </div>                        
-
-
+                      </div>                                    
                       <!--Boton-->
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
@@ -176,15 +163,45 @@
                 </div>
                 <script>
                   angular.module("formExample", [])
-                  .controller('formController', ['$scope', function($scope) {
+                  .controller('formController', ['$scope','$http', function($scope,$http) {
                     $scope.master = {};
                     $scope.update = function(pelicula) {
+
+                      var to_list = pelicula.genres;
+                      to_list = to_list.split(",");
+                      pelicula.genres = to_list;
+                      var to_list = pelicula.keywords;
+                      to_list = to_list.split(",");
+                      pelicula.keywords = to_list;
                       console.log("que chucha");
                       $scope.master = angular.copy(pelicula);
+
+
+
+                      var req = {
+                       method: 'POST',
+                       url: 'http://131.221.33.124:8080/feelms-backend/admin/add/film',
+                       headers: {
+                         'Content-Type': 'application/json'
+                       },
+                       data: $scope.master
+                      }
+
+                      $http(req).then(function(response){
+
+                        console.log(response);
+
+                      }, function(response){
+                        console.log(response);
+
+                      });
+
+
                     };
                     $scope.reset = function() {
                       $scope.pelicula = angular.copy($scope.master);
                     };
+
                     $scope.list_genre = [];
                     //$scope.text_genre = 'hello';
                     $scope.submitgenres = function() {
@@ -207,7 +224,7 @@
                         $scope.text_keywords = '';
                       
                     };
-                    $scope.reset();
+                    //$scope.reset();
                   }]);
                 </script>
               </div>        
