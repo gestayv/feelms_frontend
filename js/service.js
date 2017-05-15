@@ -38,6 +38,7 @@
 	    	$http.get(url).
 	        then(function(respuesta) {
 	            $scope.data_tweets_pelicula = respuesta.data;
+	            console.log(respuesta.data);
 	        });
 	    }
 
@@ -54,6 +55,7 @@
 	    	$http.get(url).
 	        then(function(respuesta) {
 	            $scope.data_tweets_pelicula = respuesta.data;
+	            console.log(respuesta.data);
 	        });
 	    }
 
