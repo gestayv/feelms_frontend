@@ -66,8 +66,16 @@
 	    
 
 	});
-
-	app.controller('topController', function($scope) {
+	
+	app.controller('topController', function($scope, $http) {
+		var url = 'http://localhost:8080/json_test/top.json';
+    	$http.get(url).
+        then(function(response) {
+            $scope.data_tweets_popularidad = response.data;
+        });
+        this.peliculas = peliculas;
+	});
+	/*app.controller('topController', function($scope) {
 		var urlBase = "https://localhost";
 		this.peliculas = peliculas;	// sólo para probar con datos de acá mismo
 		//Entrada : cant_dias, dias
@@ -87,7 +95,7 @@
 	    }*/
 	    // $scope.GET_TOP_Peliculas(0,0);
 
-	});
+	//});
 
 	app.directive('headerSection', function() {
 		return {

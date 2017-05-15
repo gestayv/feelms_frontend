@@ -16,16 +16,16 @@
                     <table class="table table-hover" ng-controller="topController as topCtrl">
                         <thead>
                             <tr>
-                                <th>Posición</th>
+                                <th>Posición </th>
                                 <th>Película</th>
                                 <th>Popularidad</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="pelicula in topCtrl.peliculas | orderBy:'-pop' | limitTo: 10">
+                            <tr ng-repeat="pelicula in data_tweets_popularidad | orderBy:'-tweetCount' | limitTo: 10">
                                 <td>{{$index + 1}}</td>
-                                <td><a ui-sref="new-rp({ peliculaId: pelicula.id })">{{pelicula.name}}</a></td>
-                                <td>{{pelicula.pop}}</td>
+                                <td><a ui-sref="new-rp({ peliculaId: pelicula.filmId })">{{pelicula.filmTitle}}</a></td>
+                                <td>{{pelicula.tweetCount}}</td>
                             </tr>                   
                         </tbody>
                     </table>
