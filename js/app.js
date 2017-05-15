@@ -1,5 +1,6 @@
 (function() {
 	var app = angular.module('feelms',['ui.router']);
+		 var urlBase = "http://localhost:8080";
 
 	app.config(['$stateProvider', '$urlRouterProvider', registerRoutes]);
 	app.run(['$rootScope', '$location', function($rootScope, $location) {
@@ -25,7 +26,6 @@
 	};
 
 	app.controller("filmController", function($scope, $stateParams, $http) {
-		 var urlBase = "https://localhost";
 	    //Entrada : ID Pelicula
 	    //Salida  : Array con los datos de la pelicuka
 	    //Obtener información de la pelicula
@@ -33,8 +33,8 @@
 
 	    	id_pelicula = 3;
 	    	//Cambiar al finalizar debug
-	    	var url = "http://localhost:8080/json_test/info_peli.json";
-	    	//var url = urlBase + "/feelms/api/films/" + id_pelicula;
+	    	//var url = "http://localhost:8080/json_test/info_peli.json";
+	    	var url = urlBase + "/feelms/api/films/" + id_pelicula;
 
 	    	$http.get(url).
 	        then(function(respuesta) {
@@ -54,8 +54,8 @@
 
 
 	    	//Cambiar al finalizar debug
-	    	var url = "localhost:8080/json_test/cant_tweets.json";
-	    	//var url = urlBase + "/feelms/api/films/" + id_pelicula + "/tweets/count/" + cant_dias;
+	    	//var url = "localhost:8080/json_test/cant_tweets.json";
+	    	var url = urlBase + "/feelms/api/films/" + id_pelicula + "/tweets/count/" + cant_dias;
 
 	    	$http.get(url).
 	        then(function(respuesta) {
@@ -68,13 +68,24 @@
 	});
 	
 	app.controller('topController', function($scope, $http) {
-		var url = 'http://localhost:8080/json_test/top.json';
+
+		$scope.GET_TOP_Peliculas = function(cant_peliculas, cant_dias){
+		
+	   	var url = urlBase + "/feelms/api/top/"+ cant_peliculas + "/days/" + cant_dias; 
+		//var url = 'http://localhost:8080/json_test/top.json';
     	$http.get(url).
-        then(function(response) {
-            $scope.data_tweets_popularidad = response.data;
-        });
+        then(function(respuesta) {
+            $scope.data_tweets_popularidad = respuesta.data;
+		});
+
+
+	    };
+
         this.peliculas = peliculas;
+
+		$scope.GET_TOP_Peliculas(3,3);
 	});
+
 	/*app.controller('topController', function($scope) {
 		var urlBase = "https://localhost";
 		this.peliculas = peliculas;	// sólo para probar con datos de acá mismo
@@ -86,12 +97,11 @@
 
 	    	//Cambiar al finalizar debug
 	    	var url = "localhost:8080/json_test/top.json";
-	    	//var url = urlBase + "/feelms/api/top/"+ cant_peliculas + "/days/" + cant_dias; 
 
 	    	$http.get(url).
 	        then(function(respuesta) {
 	            $scope.data_tweets_pelicula = respuesta.data;
-	        });
+	     
 	    }*/
 	    // $scope.GET_TOP_Peliculas(0,0);
 
