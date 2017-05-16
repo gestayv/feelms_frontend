@@ -12,18 +12,36 @@
 	  $stateProvider
 	    .state('home', {
 	    	url: '/',
-	      	templateUrl: 'home.html'
+	      	templateUrl: 'vistas/home.html'
 	    })
 	    .state('rank', {
 	    	url: '/',
-	    	templateUrl: 'rank.html'
+	    	templateUrl: 'vistas/rank.html'
+	    })
+	    .state('searchResults', {
+	    	url: '/search/:keywords',
+	    	templateUrl: 'vistas/searchResults.html',
+	    	controller: 'searchResultsController'
 	    })
 	    .state('new-rp', {
 	      url: '/film/:peliculaId',
-	      templateUrl: 'film.html',
+	      templateUrl: 'vistas/film.html',
 	      controller: 'filmController'
 	    });
 	};
+
+	// aun no logro poner en una variable las keywords de la busqueda en la vista searchResults
+	app.controller("searchResultsController", function($stateParams) {
+		console.log($stateParams);
+		this.keywords = $stateParams;
+		console.log(keywords);
+	});
+
+	app.controller("searchController", function($scope, $state) {
+		$scope.search = function() {
+			$state.go("searchResults", {keywords: $scope.keywords});
+		}
+	});
 
 	app.controller("filmController", function($scope, $stateParams, $http) {
 	    //Entrada : ID Pelicula
@@ -62,9 +80,6 @@
 	           $scope.data_tweets_pelicula = respuesta.data;
 	        });
 	    }
-
-	    
-
 	});
 	
 	app.controller('topController', function($scope, $http) {
@@ -104,8 +119,19 @@
 	     
 	    }*/
 	    // $scope.GET_TOP_Peliculas(0,0);
-
 	//});
+
+	app.controller('formController', ['$scope', function($scope) {
+		$scope.master = {};
+		$scope.update = function(pelicula) {
+			console.log("que chucha");
+			$scope.master = angular.copy(pelicula);
+		};
+		$scope.reset = function() {
+			$scope.pelicula = angular.copy($scope.master);
+		};
+		console.log(pelicula);
+	}]);
 
 	app.directive('headerSection', function() {
 		return {
