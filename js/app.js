@@ -29,12 +29,11 @@
 	      controller: 'filmController'
 	    });
 	};
-
-	// aun no logro poner en una variable las keywords de la busqueda en la vista searchResults
-	app.controller("searchResultsController", function($stateParams) {
+	
+	app.controller("searchResultsController", function($scope, $stateParams) {
 		console.log($stateParams);
-		this.keywords = $stateParams;
-		console.log(keywords);
+		$scope.keywords = $stateParams.keywords;
+		console.log($scope.keywords);
 	});
 
 	app.controller("searchController", function($scope, $state) {
