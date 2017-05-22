@@ -22,7 +22,7 @@
 	    	templateUrl: 'vistas/admin.html'
 	    })
 	    .state('searchResults', {
-	    	url: '/search/:keywords',
+	    	url: '/search/:query',
 	    	templateUrl: 'vistas/searchResults.html',
 	    	controller: 'searchResultsController'
 	    })
@@ -33,15 +33,32 @@
 	    });
 	};
 
-	app.controller("searchResultsController", function($scope, $stateParams) {
+	app.controller("searchResultsController", function($scope, $stateParams, $http, GETService) {
+
+		function GET_Search_Results(query, limit) {
+			
+			GETService.GET_Search_Results(query, limit)
+			.then(function(respuesta) {
+
+				$scope.data_peliculas = respuesta.data;
+				console.log(respuesta.data);
+			}, function(error){console.log(error)});
+
+		}
+		GET_Search_Results($stateParams.query, 3);
+
+
 		console.log($stateParams);
-		$scope.keywords = $stateParams.keywords;
-		console.log($scope.keywords);
+		$scope.query = $stateParams.query;
+		console.log($scope.query);
 	});
 
 	app.controller("searchController", function($scope, $state) {
 		$scope.search = function() {
-			$state.go("searchResults", {keywords: $scope.keywords});
+			if($scope.query != null) {
+				$state.go("searchResults", {query: $scope.query});
+				$scope.query = null;
+			}		
 		}
 	});
 
@@ -58,7 +75,6 @@
 
         }
 	    GET_Info_Pelicula($stateParams.peliculaId);
-
 	});
 
 	app.controller('topController', function($scope, $http, GETService) {
@@ -94,7 +110,6 @@
 		GET_TOP_Peliculas(10, 30);
 		//	Que el ranking que se muestra en home sea anual.
 		GET_TOP_Peliculas(5,365);
-
 	});
 
 	app.controller('formController', ['$scope', function($scope) {
@@ -143,8 +158,7 @@
 			templateUrl: 'html/footer-section.html'
 		};
 	});
-
-
+	
 	peliculas = [
 		{
 			id: 1,

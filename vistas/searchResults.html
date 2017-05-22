@@ -23,7 +23,7 @@
                         <a href="#resultados">Resultados</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="index.html">Home</a>
+                        <a href="index.html/#maincontent">Home</a>
                     </li>                  
                 </ul>
             </div>
@@ -37,16 +37,18 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                 <br><h2>Resultados de la búsqueda</h2>
-                <h3>Esta sería la query: {{keywords}}</h3>
+                <h3>"{{query}}"</h3>
                     <hr class="star-light">
                 </div>
             </div>   
 
-            <div class="list-group"> <!-- ng-repeat="film(nombre de la variable en el controller) in nombreController" -->
+            <div class="list-group" ng-repeat="film in data_peliculas"> <!-- ng-repeat="film(nombre de la variable en el controller) in nombreController" -->
                 <div class="list-group-item">
                  <!--Ahi esta el href!! Se debería repetir esto la cantidad de resultados encontrados-->
-                    <td><a ui-sref="new-rp({ peliculaId: film.id })"><h4 class="list-group-item-heading"> Título película <!-- {{film.title}} --></h4></a></td>
-                    <p class="list-group-item-text">  Año: 2022 <br> Géneros: Acción, Sci-Fi, Aventura <br> Director: Jesús de Nazaret <!-- Año: {{film.realeaseDate}} <br> Géneros: {{film.genres}} <br> Director: {{film.director.firstName}} {{film.director.lastName}}--></p>
+                    <td><a ui-sref="new-rp({ peliculaId: film.id })"><h4 class="list-group-item-heading">{{film.title}}</h4></a></td>
+                    <p class="list-group-item-text">
+                        <small>Título Original: {{film.originalTitle}} <br> Año: {{film.releaseDate | date}} <br> Duración: {{film.length}}</small>
+                    </p>
                 </div> 
             </div>
         </div>

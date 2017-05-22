@@ -41,4 +41,15 @@ angular.module('feelms')
 	    };
 
 
+	    //Entrada: Busqueda ingresada (query)
+	    //Salida: Cantidad "limit" de peliculas coincidentes con la busqueda (query) ingresada
+	   // Ejemplo de llamado: /feelms/api/search/{query}/{limit}
+	   this.GET_Search_Results = function(query, limit) {
+	   		var url = urlBase + "/feelms/api/search/" + query + "/" + limit;
+	   		
+	   		console.log(url)
+	   		return $http.get(url);
+	   } 
+
+
 	});
