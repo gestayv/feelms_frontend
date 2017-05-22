@@ -81,24 +81,49 @@
 	        });
 	    }
 	});
-	
+
 	app.controller('topController', function($scope, $http) {
 
+
+
 		$scope.GET_TOP_Peliculas = function(cant_peliculas, cant_dias){
-		
-	   	var url = urlBase + "/feelms/api/top/"+ cant_peliculas + "/days/" + cant_dias; 
-		//var url = 'http://localhost:8080/json_test/top.json';
-    	$http.get(url).
-        then(function(respuesta) {
-            $scope.data_tweets_popularidad = respuesta.data;
-		});
+	   		var url = urlBase + "/feelms/api/top/"+ cant_peliculas + "/days/" + cant_dias;
 
-
+			if(cant_dias == 1)
+			{
+				$http.get(url).
+				then(function(respuesta) {
+					$scope.ranking_diario  = respuesta.data;
+				});
+			}
+			else if(cant_dias == 7)
+			{
+				$http.get(url).
+				then(function(respuesta) {
+					$scope.ranking_semanal  = respuesta.data;
+				});
+			}
+			else if(cant_dias == 30)
+			{
+				$http.get(url).
+				then(function(respuesta) {
+					$scope.ranking_mensual  = respuesta.data;
+				});
+			}
+			else
+			{
+				$http.get(url).
+				then(function(respuesta) {
+					$scope.data_tweets_popularidad  = respuesta.data;
+				});
+			}
 	    };
 
-        this.peliculas = peliculas;
-
-		$scope.GET_TOP_Peliculas(3,3);
+		this.peliculas = peliculas;
+		$scope.GET_TOP_Peliculas(10, 365);
+		$scope.GET_TOP_Peliculas(10, 1);
+		$scope.GET_TOP_Peliculas(10, 7);
+		$scope.GET_TOP_Peliculas(10, 30);
 	});
 
 	/*app.controller('topController', function($scope) {
@@ -116,7 +141,7 @@
 	    	$http.get(url).
 	        then(function(respuesta) {
 	            $scope.data_tweets_pelicula = respuesta.data;
-	     
+
 	    }*/
 	    // $scope.GET_TOP_Peliculas(0,0);
 	//});
@@ -152,7 +177,7 @@
 			restrict: 'E',
 			templateUrl: 'html/about-section.html'
 		};
-	});	
+	});
 
 	app.directive('contactSection', function() {
 		return {
@@ -178,24 +203,24 @@
 		{
 			id: 2,
 			name: 'Star Wars: The Last Jedi',
-			pop: 225 
+			pop: 225
 		},
-		{	
+		{
 			id: 3,
 			name: 'Guardians of the Galaxy 2',
 			pop: 198
 		},
-		{	
+		{
 			id: 4,
 			name: 'Un jefe en Pañales',
 			pop: 100
 		},
-		{	
+		{
 			id: 5,
 			name: 'Shrek 9',
 			pop: 54
 		},
-		{	
+		{
 			id: 6,
 			name: 'El Aro 5',
 			pop: 46
@@ -205,7 +230,7 @@
 			name: 'Rápido y Furioso 9000',
 			pop: 22
 		},
-		{	
+		{
 			id: 8,
 			name: 'Cars 4',
 			pop: 15

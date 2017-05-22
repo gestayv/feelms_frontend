@@ -20,7 +20,7 @@
                       <li class="page-scroll">
                           <a ui-sref="home" autoscroll>Home</a>
                       </li>
-                     
+
                   </ul>
               </div>
               <!-- /.navbar-collapse -->
@@ -43,13 +43,13 @@
                       <ul class="nav nav-tabs" role="tablist">
                           <li role="presentation" class="active"><a href="#yesterday" aria-controls="yesterday" role="tab" data-toggle="tab">DE AYER</a></li>
                           <li role="presentation" ><a href="#semanal" aria-controls="semanal" role="tab" data-toggle="tab">DE LA SEMANA</a></li>
-                          <li role="presentation"><a href="#mensual" aria-controls="mensual" role="tab" data-toggle="tab">DEL MES</a></li>    
+                          <li role="presentation"><a href="#mensual" aria-controls="mensual" role="tab" data-toggle="tab">DEL MES</a></li>
                       </ul>
 
                       <!-- Tab panes -->
                       <div class="tab-content" ng-controller="topController as topCtrl">
                           <div role="tabpanel" class="tab-pane active" id="yesterday">
-                              <div class="col-lg-4 col-lg-offset-2"> <br>     
+                              <div class="col-lg-4 col-lg-offset-2"> <br>
                                <div class="table-responsive">
                                   <table class="table table-hover">
                                       <thead>
@@ -60,21 +60,21 @@
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <tr ng-repeat="pelicula in topCtrl.peliculas | orderBy:'-pop' | limitTo: 10">
+                                        <tr ng-repeat="pelicula in ranking_diario | orderBy:'-pop' | limitTo: 10">
                                             <td>{{$index + 1}}</td>
-                                            <td><a ui-sref="new-rp({ peliculaId: pelicula.id })">{{pelicula.name}}</a></td>
-                                            <td>{{pelicula.pop}}</td>
-                                        </tr> 
+                                            <td><a ui-sref="new-rp({ peliculaId: pelicula.filmId })">{{pelicula.filmTitle}}</a></td>
+                                            <td>{{pelicula.tweetCount}}</td>
+                                        </tr>
                                       </tbody>
                                   </table>
-                               </div> 
+                               </div>
                               </div>
-                              <div class="col-lg-4">              
+                              <div class="col-lg-4">
                                    <img  src="img/graph.png" height="460" alt="graph">  <!-- ACA VA D3 -->
                               </div>
                           </div>
                           <div role="tabpanel" class="tab-pane" id="semanal">
-                              <div class="col-lg-4 col-lg-offset-2"> <br>     
+                              <div class="col-lg-4 col-lg-offset-2"> <br>
                                <div class="table-responsive">
                                   <table class="table table-hover">
                                       <thead>
@@ -85,22 +85,22 @@
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <tr ng-repeat="pelicula in topCtrl.peliculas | orderBy:'-pop' | limitTo: 10">
+                                        <tr ng-repeat="pelicula in ranking_semanal | orderBy:'-pop' | limitTo: 10">
                                             <td>{{$index + 1}}</td>
-                                            <td><a ui-sref="new-rp({ peliculaId: pelicula.id })">{{pelicula.name}}</a></td>
-                                            <td>{{pelicula.pop}}</td>
-                                        </tr> 
+                                            <td><a ui-sref="new-rp({ peliculaId: pelicula.filmId })">{{pelicula.filmTitle}}</a></td>
+                                            <td>{{pelicula.tweetCount}}</td>
+                                        </tr>
                                       </tbody>
                                   </table>
-                               </div> 
+                               </div>
                               </div>
-                              <div class="col-lg-4">              
+                              <div class="col-lg-4">
                                    <img  src="img/graph.png" height="460" alt="graph">  <!-- ACA VA D3 -->
                               </div>
 
                           </div>
                           <div role="tabpanel" class="tab-pane" id="mensual">
-                               <div class="col-lg-4 col-lg-offset-2"> <br>     
+                               <div class="col-lg-4 col-lg-offset-2"> <br>
                                <div class="table-responsive">
                                   <table class="table table-hover">
                                       <thead>
@@ -111,16 +111,16 @@
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <tr ng-repeat="pelicula in topCtrl.peliculas | orderBy:'-pop' | limitTo: 10">
+                                        <tr ng-repeat="pelicula in ranking_mensual | orderBy:'-pop' | limitTo: 10">
                                             <td>{{$index + 1}}</td>
-                                            <td><a ui-sref="new-rp({ peliculaId: pelicula.id })">{{pelicula.name}}</a></td>
-                                            <td>{{pelicula.pop}}</td>
-                                        </tr> 
+                                            <td><a ui-sref="new-rp({ peliculaId: pelicula.filmId })">{{pelicula.filmTitle}}</a></td>
+                                            <td>{{pelicula.tweetCount}}</td>
+                                        </tr>
                                       </tbody>
                                   </table>
-                               </div> 
+                               </div>
                               </div>
-                              <div class="col-lg-4">              
+                              <div class="col-lg-4">
                                    <img  src="img/graph.png" height="460" alt="graph">  <!-- ACA VA D3 -->
                               </div>
                           </div>
