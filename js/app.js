@@ -18,6 +18,10 @@
 	    	url: '/',
 	    	templateUrl: 'vistas/rank.html'
 	    })
+	    .state('admin', {
+	    	url: '/',
+	    	templateUrl: 'vistas/admin.html'
+	    })
 	    .state('searchResults', {
 	    	url: '/search/:keywords',
 	    	templateUrl: 'vistas/searchResults.html',
@@ -29,12 +33,11 @@
 	      controller: 'filmController'
 	    });
 	};
-
-	// aun no logro poner en una variable las keywords de la busqueda en la vista searchResults
-	app.controller("searchResultsController", function($stateParams) {
+	
+	app.controller("searchResultsController", function($scope, $stateParams) {
 		console.log($stateParams);
-		this.keywords = $stateParams;
-		console.log(keywords);
+		$scope.keywords = $stateParams.keywords;
+		console.log($scope.keywords);
 	});
 
 	app.controller("searchController", function($scope, $state) {
@@ -43,108 +46,39 @@
 		}
 	});
 
-	app.controller("filmController", function($scope, $stateParams, $http) {
-	    //Entrada : ID Pelicula
-	    //Salida  : Array con los datos de la pelicuka
-	    //Obtener información de la pelicula
-	    $scope.GET_Info_Pelicula = function(id_pelicula){
+	app.controller("filmController", function($scope, $stateParams, $http, GETService) {
 
-	    	id_pelicula = 3;
-	    	//Cambiar al finalizar debug
-	    	//var url = "http://localhost:8080/json_test/info_peli.json";
-	    	var url = urlBase + "/feelms/api/films/" + id_pelicula;
+		function GET_Info_Pelicula(id_pelicula){
 
-	    	$http.get(url).
-	        then(function(respuesta) {
+	        GETService.GET_Info_Pelicula(id_pelicula)
+	        .then(function(respuesta){
+
 	            $scope.data_pelicula = respuesta.data;
 	            console.log(respuesta.data);
-	        });
-	    }
+	        }, function(error){console.log(error)});
 
-	    $scope.GET_Info_Pelicula($scope.peliculaId);
+        }
+	    GET_Info_Pelicula($stateParams.peliculaId);
 
-
-
-	    //Entrada : ID pelicula, Cantidad de días
-	    //Salida : Contador de tweets de la pelicula para cada dia señalado
-	    // Ejemplo de llamado: /feelms/api/films/{film_id}/tweets/count/{days}
-	    $scope.GET_Cant_Tweets_Pelicula = function(id_pelicula, cant_dias){
-
-
-	    	//Cambiar al finalizar debug
-	    	//var url = "localhost:8080/json_test/cant_tweets.json";
-	    	var url = urlBase + "/feelms/api/films/" + id_pelicula + "/tweets/count/" + cant_dias;
-
-	    	$http.get(url).
-	        then(function(respuesta) {
-	           $scope.data_tweets_pelicula = respuesta.data;
-	        });
-	    }
 	});
+	
+	app.controller('topController', function($scope, $http, GETService) {
 
-	app.controller('topController', function($scope, $http) {
 
+		function GET_TOP_Peliculas(cant_peliculas, cant_dias){
 
+	        GETService.GET_TOP_Peliculas(cant_peliculas, cant_dias)
+	        .then(function(respuesta){
 
-		$scope.GET_TOP_Peliculas = function(cant_peliculas, cant_dias){
-	   		var url = urlBase + "/feelms/api/top/"+ cant_peliculas + "/days/" + cant_dias;
+	            $scope.data_tweets_popularidad = respuesta.data;
+	            console.log(respuesta.data);
+	        }, function(error){console.log(error)});
 
-			if(cant_dias == 1)
-			{
-				$http.get(url).
-				then(function(respuesta) {
-					$scope.ranking_diario  = respuesta.data;
-				});
-			}
-			else if(cant_dias == 7)
-			{
-				$http.get(url).
-				then(function(respuesta) {
-					$scope.ranking_semanal  = respuesta.data;
-				});
-			}
-			else if(cant_dias == 30)
-			{
-				$http.get(url).
-				then(function(respuesta) {
-					$scope.ranking_mensual  = respuesta.data;
-				});
-			}
-			else
-			{
-				$http.get(url).
-				then(function(respuesta) {
-					$scope.data_tweets_popularidad  = respuesta.data;
-				});
-			}
-	    };
+        }
 
-		this.peliculas = peliculas;
-		$scope.GET_TOP_Peliculas(10, 365);
-		$scope.GET_TOP_Peliculas(10, 1);
-		$scope.GET_TOP_Peliculas(10, 7);
-		$scope.GET_TOP_Peliculas(10, 30);
+		GET_TOP_Peliculas(5,30);
+
 	});
-
-	/*app.controller('topController', function($scope) {
-		var urlBase = "https://localhost";
-		this.peliculas = peliculas;	// sólo para probar con datos de acá mismo
-		//Entrada : cant_dias, dias
-	    //Salida : TOP X de peliculas a partir de cantidad de tweets en Y días
-	    // Ejemplo de llamado: /feelms/api/top/{cantidad}/days/{days}
-	  /*  $scope.GET_TOP_Peliculas = function(cant_peliculas, cant_dias){
-
-
-	    	//Cambiar al finalizar debug
-	    	var url = "localhost:8080/json_test/top.json";
-
-	    	$http.get(url).
-	        then(function(respuesta) {
-	            $scope.data_tweets_pelicula = respuesta.data;
-
-	    }*/
-	    // $scope.GET_TOP_Peliculas(0,0);
-	//});
 
 	app.controller('formController', ['$scope', function($scope) {
 		$scope.master = {};
@@ -177,7 +111,7 @@
 			restrict: 'E',
 			templateUrl: 'html/about-section.html'
 		};
-	});
+	});	
 
 	app.directive('contactSection', function() {
 		return {
@@ -203,24 +137,24 @@
 		{
 			id: 2,
 			name: 'Star Wars: The Last Jedi',
-			pop: 225
+			pop: 225 
 		},
-		{
+		{	
 			id: 3,
 			name: 'Guardians of the Galaxy 2',
 			pop: 198
 		},
-		{
+		{	
 			id: 4,
 			name: 'Un jefe en Pañales',
 			pop: 100
 		},
-		{
+		{	
 			id: 5,
 			name: 'Shrek 9',
 			pop: 54
 		},
-		{
+		{	
 			id: 6,
 			name: 'El Aro 5',
 			pop: 46
@@ -230,7 +164,7 @@
 			name: 'Rápido y Furioso 9000',
 			pop: 22
 		},
-		{
+		{	
 			id: 8,
 			name: 'Cars 4',
 			pop: 15
