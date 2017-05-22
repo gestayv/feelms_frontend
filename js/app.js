@@ -1,6 +1,5 @@
 (function() {
 	var app = angular.module('feelms',['ui.router']);
-		 var urlBase = "http://localhost:8080";
 
 	app.config(['$stateProvider', '$urlRouterProvider', registerRoutes]);
 	app.run(['$rootScope', '$location', function($rootScope, $location) {
@@ -33,7 +32,7 @@
 	      controller: 'filmController'
 	    });
 	};
-	
+
 	app.controller("searchResultsController", function($scope, $stateParams) {
 		console.log($stateParams);
 		$scope.keywords = $stateParams.keywords;
@@ -61,7 +60,7 @@
 	    GET_Info_Pelicula($stateParams.peliculaId);
 
 	});
-	
+
 	app.controller('topController', function($scope, $http, GETService) {
 
 
@@ -69,14 +68,32 @@
 
 	        GETService.GET_TOP_Peliculas(cant_peliculas, cant_dias)
 	        .then(function(respuesta){
-
-	            $scope.data_tweets_popularidad = respuesta.data;
+				if(cant_dias == 1)
+				{
+					$scope.ranking_diario = respuesta.data;
+				}
+				else if (cant_dias == 7)
+				{
+					$scope.ranking_semanal = respuesta.data;
+				}
+				else if(cant_dias == 30)
+				{
+					$scope.ranking_mensual = respuesta.data;
+				}
+				else
+				{
+					$scope.data_tweets_popularidad = respuesta.data;
+				}
 	            console.log(respuesta.data);
 	        }, function(error){console.log(error)});
 
         }
 
-		GET_TOP_Peliculas(5,30);
+		GET_TOP_Peliculas(10, 1);
+		GET_TOP_Peliculas(10, 7);
+		GET_TOP_Peliculas(10, 30);
+		//	Que el ranking que se muestra en home sea anual.
+		GET_TOP_Peliculas(5,365);
 
 	});
 
@@ -111,7 +128,7 @@
 			restrict: 'E',
 			templateUrl: 'html/about-section.html'
 		};
-	});	
+	});
 
 	app.directive('contactSection', function() {
 		return {
@@ -137,24 +154,24 @@
 		{
 			id: 2,
 			name: 'Star Wars: The Last Jedi',
-			pop: 225 
+			pop: 225
 		},
-		{	
+		{
 			id: 3,
 			name: 'Guardians of the Galaxy 2',
 			pop: 198
 		},
-		{	
+		{
 			id: 4,
 			name: 'Un jefe en Pañales',
 			pop: 100
 		},
-		{	
+		{
 			id: 5,
 			name: 'Shrek 9',
 			pop: 54
 		},
-		{	
+		{
 			id: 6,
 			name: 'El Aro 5',
 			pop: 46
@@ -164,7 +181,7 @@
 			name: 'Rápido y Furioso 9000',
 			pop: 22
 		},
-		{	
+		{
 			id: 8,
 			name: 'Cars 4',
 			pop: 15

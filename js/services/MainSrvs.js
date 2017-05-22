@@ -32,8 +32,8 @@ angular.module('feelms')
 	    //Salida : TOP X de peliculas a partir de cantidad de tweets en Y días
 	    // Ejemplo de llamado: /feelms/api/top/{cantidad}/days/{days}
 		this.GET_TOP_Peliculas = function(cant_peliculas, cant_dias){
-		
-	   		var url = urlBase + "/feelms/api/top/"+ cant_peliculas + "/days/" + cant_dias; 
+
+	   		var url = urlBase + "/feelms/api/top/"+ cant_peliculas + "/days/" + cant_dias;
 
 	   		console.log(url)
 	    	return $http.get(url);
