@@ -23,8 +23,8 @@
                         <a href="#resultados">Resultados</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="index.html/#maincontent">Home</a>
-                    </li>                  
+                        <a ui-sref="home" href="#!/">Home</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -40,7 +40,7 @@
                 <h3>"{{query}}"</h3>
                     <hr class="star-light">
                 </div>
-            </div>   
+            </div>
 
             <div class="list-group" ng-repeat="film in data_peliculas"> <!-- ng-repeat="film(nombre de la variable en el controller) in nombreController" -->
                 <div class="list-group-item">
@@ -49,7 +49,7 @@
                     <p class="list-group-item-text">
                         <small>Título Original: {{film.originalTitle}} <br> Año: {{film.releaseDate | date}} <br> Duración: {{film.length}}</small>
                     </p>
-                </div> 
+                </div>
             </div>
         </div>
     </section>
