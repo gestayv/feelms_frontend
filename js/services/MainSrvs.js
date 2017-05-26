@@ -35,21 +35,30 @@ angular.module('feelms')
 
 	   		var url = urlBase + "/feelms/api/top/"+ cant_peliculas + "/days/" + cant_dias;
 
-	   		console.log(url)
+	   		console.log(url);
 	    	return $http.get(url);
 
-	    };
+	    }
 
 
 	    //Entrada: Busqueda ingresada (query)
 	    //Salida: Cantidad "limit" de peliculas coincidentes con la busqueda (query) ingresada
-	   // Ejemplo de llamado: /feelms/api/search/{query}/{limit}
-	   this.GET_Search_Results = function(query, limit) {
+	   	// Ejemplo de llamado: /feelms/api/search/{query}/{limit}
+	   	this.GET_Search_Results = function(query, limit) {
 	   		var url = urlBase + "/feelms/api/search/" + query + "/" + limit;
 	   		
 	   		console.log(url)
 	   		return $http.get(url);
-	   } 
+	   	}
 
+	   	//Entrada: None
+	    //Salida: Todas las películas en la BD
+	   	// Ejemplo de llamado: /feelms/api/films
+	   	this.GET_Peliculas = function() {
+	   		var url = urlBase + "/feelms/api/films";
+
+	   		console.log(url);
+	   		return $http.get(url);
+	   	}
 
 	});

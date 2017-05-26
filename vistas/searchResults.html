@@ -42,9 +42,8 @@
                 </div>
             </div>
 
-            <div class="list-group" ng-repeat="film in data_peliculas"> <!-- ng-repeat="film(nombre de la variable en el controller) in nombreController" -->
+            <div class="list-group" ng-repeat="film in data_peliculas">
                 <div class="list-group-item">
-                 <!--Ahi esta el href!! Se debería repetir esto la cantidad de resultados encontrados-->
                     <td><a ui-sref="new-rp({ peliculaId: film.id })"><h4 class="list-group-item-heading">{{film.title}}</h4></a></td>
                     <p class="list-group-item-text">
                         <small>Título Original: {{film.originalTitle}} <br> Año: {{film.releaseDate | date}} <br> Duración: {{film.length}}</small>
