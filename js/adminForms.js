@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module("adminForms", []);
+  var app = angular.module('feelms',[]);
 
   app.controller("filmsController", ["$scope", "$http", "GETService", function($scope, $http, GETService) {
     function GET_Peliculas(GETService) {
@@ -12,7 +12,7 @@
     GET_Peliculas(GETService);
   }]);
 
-  app.controller('formController', ['$scope','$http', function($scope,$http) {
+  app.controller('addFormController', ['$scope','$http', function($scope,$http) {
     $scope.master = {};
     $scope.update = function(pelicula) {
       var to_list = pelicula.genres;

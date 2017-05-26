@@ -127,6 +127,9 @@
 	        }, function(error){console.log(error)});
 
         }
+        console.log($stateParams.peliculaId);
+        $scope.ID = $stateParams.peliculaId;
+        console.log($scope.ID);
 	    GET_Info_Pelicula($stateParams.peliculaId);
 	});
 
