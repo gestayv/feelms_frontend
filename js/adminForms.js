@@ -37,6 +37,12 @@
       });
     };
 
+    $scope.showInfo = function(pelicula) {
+      console.log(pelicula);
+      $scope.master = angular.copy(pelicula);
+      console.log($scope.master);
+    };
+
     /*$scope.edit = function(pelicula) {
       var to_list = pelicula.genres;
       to_list = to_list.split(",");
