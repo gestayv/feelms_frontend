@@ -71,7 +71,7 @@
 	        }
 	        $scope.pelicula.genre.push(parseInt(this.text_genre));
 	        $scope.list_genre.push(parseInt(this.text_genre));
-	        $scope.text_genre = '';  
+	        $scope.text_genre = '';
 	    };
 
 	    $scope.submitkeywords = function() {
@@ -81,7 +81,7 @@
 	        }
 	        $scope.pelicula.keywords.push(parseInt(this.text_keywords));
 	        $scope.list_genre.push(parseInt(this.text_keywords));
-	        $scope.text_keywords = '';  
+	        $scope.text_keywords = '';
 	    };
     //$scope.reset();
   	});
@@ -89,7 +89,7 @@
 	app.controller("searchResultsController", function($scope, $stateParams, $http, GETService) {
 
 		function GET_Search_Results(query, limit) {
-			
+
 			GETService.GET_Search_Results(query, limit)
 			.then(function(respuesta) {
 
@@ -111,7 +111,7 @@
 			if($scope.query != null) {
 				$state.go("searchResults", {query: $scope.query});
 				$scope.query = null;
-			}		
+			}
 		}
 	});
 
@@ -165,7 +165,7 @@
 		GET_TOP_Peliculas(10, 7);
 		GET_TOP_Peliculas(10, 30);
 		//	Que el ranking que se muestra en home sea anual.
-		GET_TOP_Peliculas(5,365);
+		GET_TOP_Peliculas(10,365);
 	});
 
 	app.directive('headerSection', function() {
@@ -202,7 +202,7 @@
 			templateUrl: 'html/footer-section.html'
 		};
 	});
-	
+
 	peliculas = [
 		{
 			id: 1,

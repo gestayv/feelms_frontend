@@ -1,0 +1,48 @@
+<html ng-app='d3App' lang="en">
+<head>
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<script type="text/javascript" src="https://unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="/feelms_frontend/js/test.js"></script>
+
+
+<style type="text/css">
+.link line {
+	stroke: #999;
+	stroke-opacity: 0.6;
+}
+
+.node circle {
+	stroke: black;
+	stroke-width: 0px;
+}
+
+.node text{
+	fill: #000;
+	font-family: Helvetica
+}
+
+svg {
+  border:1px solid black;
+}
+
+#rcorners6{
+    border-radius: 15px 15px;
+    border: 1px solid black;
+    background: #fff;
+    padding: 10px;
+    width: auto;
+    height: auto;
+    overflow: auto;
+    white-space: pre;
+}
+</style>
+</head>
+<body>
+    <d3-test></d3-test>
+</body>
+
+</html>
