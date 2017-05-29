@@ -220,3 +220,19 @@ angular.module('d3App', ['d3']).
             }
         };
     }]);
+
+    angular.module('d3App').
+        directive(/*nombre directiva*/, ['d3', function (d3) {
+            return {
+                restrict: 'EA',
+                scope:{},
+                link: function(scope, element, attrs)
+                {
+                    d3.d3().then(function(d3){
+
+                        /*Código d3*/
+
+                    });
+                }
+            };
+        }]);
