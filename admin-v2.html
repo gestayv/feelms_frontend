@@ -69,9 +69,9 @@
                   <li role="presentation" ><a href="#edit" aria-controls="edit" role="tab" data-toggle="tab">Editar Película</a></li>
                 </ul>
                    <!-- Tab panes -->
-                <div class="tab-content" ng-controller="addFormController">
+                <div class="tab-content">
                   <!-- Agregar -->
-                  <div role="tabpanel" class="tab-pane active" id="add">
+                  <div role="tabpanel" class="tab-pane active" id="add" ng-controller="addFormController">
                     <div class="row">
                       <div class="col-md-6 col-md-offset-3">
                         <form novalidate class="form-horizontal">
@@ -169,20 +169,19 @@
                     </div>
                   </div>  
                   <!-- Editar -->
-                  <div role="tabpanel" class="tab-pane" id="edit" ng-controller="filmsController" >   
-                    <div class="form-group">
+                  <div role="tabpanel" class="tab-pane" id="edit" ng-controller="editFormController">   
+                    <div class="form-group" ng-controller="filmsController">
                       <label class="col-md-4 col-md-offset-4">Escoge una película:</label>
                         <div class="col-md-4 col-md-offset-4 selectContainer">
                           <select class="form-control" name="size" ng-model="selectedID"><!-- ng-options="film as film.originalTitle for film in data_peliculas track by film.id -->"
                             <option ng-repeat="film in data_peliculas" value="{{film.id}}">{{film.title}}</option>
                           </select><br>
-                          <button  type="button" class="pull-right btn btn-primary" data-toggle="collapse" data-target="#editForm" ng-click="showInfo(data_peliculas[selectedID-1])">Seleccionar</button>
+                          <button type="button" class="pull-right btn btn-primary" data-toggle="collapse" ng-click="showInfo(data_peliculas[selectedID-1])">Seleccionar</button>
                         </div>
                     </div>
-                    <div class="row collapse" id="editForm">
+                    <div id="editForm">
                       <div class="col-md-6 col-md-offset-3">
                         <form novalidate class="form-horizontal">
-                        {{selectedID}}
                           <fieldset><br>
                             <!-- Titulo Pelicula id: title -->
                             <div class="form-group">

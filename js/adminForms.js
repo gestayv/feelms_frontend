@@ -12,30 +12,8 @@
     GET_Peliculas(GETService);
   }]);
 
-  app.controller('addFormController', ['$scope','$http', function($scope,$http) {
+  app.controller('editFormController', ['$scope','$http', function($scope, $http) {
     $scope.master = {};
-    $scope.update = function(pelicula) {
-      var to_list = pelicula.genres;
-      to_list = to_list.split(",");
-      pelicula.genres = to_list;
-      var to_list = pelicula.keywords;
-      to_list = to_list.split(",");
-      pelicula.keywords = to_list;
-      $scope.master = angular.copy(pelicula);
-      var req = {
-       method: 'POST',
-       url: 'http://131.221.33.124:8080/feelms/api/admin/add/film',
-       headers: {
-         'Content-Type': 'application/json'
-       },
-       data: $scope.master
-      }
-      $http(req).then(function(response){
-        console.log(response);
-      }, function(response){
-        console.log(response);
-      });
-    };
 
     $scope.showInfo = function(pelicula) {
       console.log(pelicula);
@@ -65,6 +43,33 @@
         console.log(response);
       });
     };*/
+
+  }]);  
+
+  app.controller('addFormController', ['$scope','$http', function($scope,$http) {
+    $scope.master = {};
+    $scope.update = function(pelicula) {
+      var to_list = pelicula.genres;
+      to_list = to_list.split(",");
+      pelicula.genres = to_list;
+      var to_list = pelicula.keywords;
+      to_list = to_list.split(",");
+      pelicula.keywords = to_list;
+      $scope.master = angular.copy(pelicula);
+      var req = {
+       method: 'POST',
+       url: 'http://131.221.33.124:8080/feelms/api/admin/add/film',
+       headers: {
+         'Content-Type': 'application/json'
+       },
+       data: $scope.master
+      }
+      $http(req).then(function(response){
+        console.log(response);
+      }, function(response){
+        console.log(response);
+      });
+    };
 
     $scope.reset = function() {
       $scope.pelicula = angular.copy($scope.master);
