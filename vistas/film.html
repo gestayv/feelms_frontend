@@ -1,4 +1,4 @@
-<body id="page-top" class="index">
+<body id="page-top" class="index" ng-app="feelms">
 <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
 
     <!-- Navigation -->
@@ -26,7 +26,7 @@
                     </li>
                     <li class="page-scroll">
                         <a href="index.html">Home</a>
-                    </li>                  
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -37,7 +37,7 @@
     <!-- Datos Película -->
     <section id="pelicula" name="pelicula">
         <br>
-        <div class="container"">
+        <div class="container">
             <div class="row" >
                 <div class="col-lg-12 text-center">
                     <h2>{{data_pelicula.title}}</h2>
@@ -46,13 +46,13 @@
             </div>
             <!--Grid -->
             <div class="row">
-              <div class="col-md-5" > 
+              <div class="col-md-5" >
                 <h4>Director: <small> {{data_pelicula.director.firstName}} {{data_pelicula.director.lastName}}</small></h4>
                 <h4>Género: <small ng-repeat="genre in data_pelicula.genres"> {{genre.name}}  </small></h4>
                 <h4>Duración: <small > {{data_pelicula.length}} </small></h4>
-                <h4>Fecha Estreno: <small> {{data_pelicula.releaseDate | date}} </small></h4> 
+                <h4>Fecha Estreno: <small> {{data_pelicula.releaseDate | date}} </small></h4>
                 <h4>Sinopsis: <small> {{data_pelicula.synopsis}} </small></h4>
-              
+
               <!-- Trigger the modal with a button -->
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#trailer">Ver Trailer</button>
 
@@ -70,7 +70,7 @@
                         </div>
                       </div>
                       <div class="modal-body">
-                        
+
                          <<!-- 16:9 aspect ratio -->
                         <div class="embed-responsive embed-responsive-16by9">
                           <iframe class="embed-responsive-item" src="https//www.youtube.com/watch?v=svnAD0TApb8"></iframe>
@@ -85,16 +85,16 @@
                   </div>
                 </div>
             </div>
-              
+
               <div class="col-md-7"> <!--Aquí va el gráfico en D3 de la película -->
                 <div class="panel panel-green">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Area Line Graph Example with Tooltips</h3>
+                        <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i>Cantidad de Tweets por Día</h3>
                     </div>
                     <div class="panel-body">
-                        GRAFICO
+                        <grafico-tweets></grafico-tweets>
                     </div>
-                </div>              
+                </div>
               </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
                     <h2>Tweets Destacados</h2>
                     <hr class="star-light">
                 </div>
-            </div>   
+            </div>
             <div class="list-group">
               <a href="#" class="list-group-item ">
                 <h4 class="list-group-item-heading"> laslo rojas‏ <small>@amnesico 9 h</small></h4>

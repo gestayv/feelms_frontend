@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('feelms',[]);
+  var app = angular.module('feelms');
 
   app.controller("filmsController", ["$scope", "$http", "GETService", function($scope, $http, GETService) {
     function GET_Peliculas(GETService) {
@@ -44,7 +44,7 @@
       });
     };*/
 
-  }]);  
+  }]);
 
   app.controller('addFormController', ['$scope','$http', function($scope,$http) {
     $scope.master = {};
@@ -84,7 +84,7 @@
         }
         $scope.pelicula.genre.push(parseInt(this.text_genre));
         $scope.list_genre.push(parseInt(this.text_genre));
-        $scope.text_genre = '';  
+        $scope.text_genre = '';
     };
 
     $scope.submitkeywords = function() {
@@ -94,7 +94,7 @@
         }
         $scope.pelicula.keywords.push(parseInt(this.text_keywords));
         $scope.list_genre.push(parseInt(this.text_keywords));
-        $scope.text_keywords = '';  
+        $scope.text_keywords = '';
     };
     //$scope.reset();
   }]);
