@@ -13,15 +13,33 @@
   }]);
 
   app.controller('editFormController', ['$scope','$http', function($scope, $http) {
+    $scope.pelicula = {};
     $scope.master = {};
 
     $scope.showInfo = function(pelicula) {
-      console.log(pelicula);
-      $scope.master = angular.copy(pelicula);
-      console.log($scope.master);
+      var generos = pelicula.genres;
+      var director = pelicula.director.id.toString();
+      //var admin = pelicula.admin.id.toString();
+      //var keywords = pelicula.keywords;
+
+      var genre = generos[0].id;
+      for (var i = 1; i < generos.length; i++) {
+        genre =  genre + "," + generos[i].id;
+      }
+
+      /*var kw = keywords[0];
+      for (var i = keywords.length - 1; i >= 1; i--) {
+        kw = ',' + keywords[i];
+      };*/
+
+      $scope.pelicula = angular.copy(pelicula);
+
+      $scope.pelicula.genres = angular.copy(genre);
+      $scope.pelicula.director = angular.copy(director);
+      //$scope.pelicula.admin = angular.copy(admin);
     };
 
-    /*$scope.edit = function(pelicula) {
+    $scope.edit = function(pelicula) {
       var to_list = pelicula.genres;
       to_list = to_list.split(",");
       pelicula.genres = to_list;
@@ -42,9 +60,9 @@
       }, function(response){
         console.log(response);
       });
-    };*/
+    };
 
-  }]);  
+  }])  
 
   app.controller('addFormController', ['$scope','$http', function($scope,$http) {
     $scope.master = {};
