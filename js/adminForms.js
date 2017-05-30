@@ -19,23 +19,25 @@
     $scope.showInfo = function(pelicula) {
       var generos = pelicula.genres;
       var director = pelicula.director.id.toString();
+      var keyterms = pelicula.keyterms;
       //var admin = pelicula.admin.id.toString();
-      //var keywords = pelicula.keywords;
+      
 
       var genre = generos[0].id;
       for (var i = 1; i < generos.length; i++) {
         genre =  genre + "," + generos[i].id;
       }
 
-      /*var kw = keywords[0];
-      for (var i = keywords.length - 1; i >= 1; i--) {
-        kw = ',' + keywords[i];
-      };*/
+      var kt = keyterms[0].term;
+      for (var i = keyterms.length - 1; i >= 1; i--) {
+        kt = kt + ',' + keyterms[i].term;
+      };
 
       $scope.pelicula = angular.copy(pelicula);
 
       $scope.pelicula.genres = angular.copy(genre);
       $scope.pelicula.director = angular.copy(director);
+      $scope.pelicula.keyterms = angular.copy(kt);
       //$scope.pelicula.admin = angular.copy(admin);
     };
 
@@ -43,9 +45,9 @@
       var to_list = pelicula.genres;
       to_list = to_list.split(",");
       pelicula.genres = to_list;
-      var to_list = pelicula.keywords;
+      var to_list = pelicula.keyterms;
       to_list = to_list.split(",");
-      pelicula.keywords = to_list;
+      pelicula.keyterms = to_list;
       $scope.master = angular.copy(pelicula);
       var req = {
        method: 'POST',
