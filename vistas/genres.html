@@ -1,0 +1,126 @@
+<div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
+
+      <!-- Navigation -->
+      <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+          <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header page-scroll">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                  </button>
+                  <a class="navbar-brand" href="#page-top">Feelms!</a>
+              </div>
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navbar-right">
+                      <li class="hidden">
+                          <a href="#page-top"></a>
+                      </li>
+                      <li class="page-scroll">
+                          <a ui-sref="home">Home</a>
+                      </li>
+
+                  </ul>
+              </div>
+              <!-- /.navbar-collapse -->
+          </div>
+          <!-- /.container-fluid -->
+      </nav>
+
+  <section class="">
+      <div class="container">
+          <div class="row">
+              <div class="row">
+                  <div class="col-lg-12 text-center">
+                      <h2>Ranking de Géneros</h2>
+                      <hr class="star-primary">
+                  </div>
+              </div>
+              <div class="col-md-12">
+                      <!-- Nav tabs -->
+                  <div class="card">
+                      <ul class="nav nav-tabs" role="tablist">
+                          <li role="presentation" class="active"><a href="#yesterday" aria-controls="yesterday" role="tab" data-toggle="tab">DE AYER</a></li>
+                          <li role="presentation" ><a href="#semanal" aria-controls="semanal" role="tab" data-toggle="tab">DE LA SEMANA</a></li>
+                          <li role="presentation"><a href="#mensual" aria-controls="mensual" role="tab" data-toggle="tab">DEL MES</a></li>
+                      </ul>
+
+                      <!-- Tab panes -->
+                      <div class="tab-content" ng-controller="topController as topCtrl">
+                          <div role="tabpanel" class="tab-pane active" id="yesterday">
+                              <div class="col-lg-4 col-lg-offset-2"> <br>
+                               <div class="table-responsive">
+                                  <table class="table table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th>Lugar</th>
+                                          <th>Género</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ng-repeat="pelicula in ranking_diario | orderBy:'-pop' | limitTo: 10">
+                                            <td>{{$index + 1}}</td>
+                                            <td><a ui-sref="new-rp({ peliculaId: pelicula.filmId })">{{pelicula.filmTitle}}</a></td>
+                                        </tr>
+                                      </tbody>
+                                  </table>
+                               </div>
+                              </div>
+                              <div class="col-lg-4">
+                                   <img  src="img/graph.png" height="460" alt="graph">  <!-- ACA VA D3 -->
+                              </div>
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="semanal">
+                              <div class="col-lg-4 col-lg-offset-2"> <br>
+                               <div class="table-responsive">
+                                  <table class="table table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th>Lugar</th>
+                                          <th>Género</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ng-repeat="pelicula in ranking_semanal | orderBy:'-pop' | limitTo: 10">
+                                            <td>{{$index + 1}}</td>
+                                            <td><a ui-sref="new-rp({ peliculaId: pelicula.filmId })">{{pelicula.filmTitle}}</a></td>
+                                        </tr>
+                                      </tbody>
+                                  </table>
+                               </div>
+                              </div>
+                              <div class="col-lg-4">
+                                   <img  src="img/graph.png" height="460" alt="graph">  <!-- ACA VA D3 -->
+                              </div>
+
+                          </div>
+                          <div role="tabpanel" class="tab-pane" id="mensual">
+                               <div class="col-lg-4 col-lg-offset-2"> <br>
+                               <div class="table-responsive">
+                                  <table class="table table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th>Lugar</th>
+                                          <th>Género</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ng-repeat="pelicula in ranking_mensual | orderBy:'-pop' | limitTo: 10">
+                                            <td>{{$index + 1}}</td>
+                                            <td><a ui-sref="new-rp({ peliculaId: pelicula.filmId })">{{pelicula.filmTitle}}</a></td>
+                                        </tr>
+                                      </tbody>
+                                  </table>
+                               </div>
+                              </div>
+                              <div class="col-lg-4">
+                                   <img  src="img/graph.png" height="460" alt="graph">  <!-- ACA VA D3 -->
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>

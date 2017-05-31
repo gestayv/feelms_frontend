@@ -20,25 +20,25 @@
       var generos = pelicula.genres;
       var director = pelicula.director.id.toString();
       var keyterms = pelicula.keyterms;
-      //var admin = pelicula.admin.id.toString();
       
-
-      var genre = generos[0].id;
-      for (var i = 1; i < generos.length; i++) {
-        genre =  genre + "," + generos[i].id;
+      if (generos.length >= 1) {  // Se verifica si es que posee generos o no (caso improbable, pero de suceder se podría todo)
+        var genre = generos[0].id;
+        for (var i = 1; i < generos.length; i++) {
+          genre =  genre + "," + generos[i].id;
+        }
+      }
+      
+      if(keyterms.length >= 1) {  // Se verifica si es que posee keywords o no (caso improbable, pero de suceder se podría todo)
+        var kt = keyterms[0].term;
+        for (var i = keyterms.length - 1; i >= 1; i--) {
+          kt = kt + ',' + keyterms[i].term;
+        };
       }
 
-      var kt = keyterms[0].term;
-      for (var i = keyterms.length - 1; i >= 1; i--) {
-        kt = kt + ',' + keyterms[i].term;
-      };
-
       $scope.pelicula = angular.copy(pelicula);
-
       $scope.pelicula.genres = angular.copy(genre);
       $scope.pelicula.director = angular.copy(director);
       $scope.pelicula.keyterms = angular.copy(kt);
-      //$scope.pelicula.admin = angular.copy(admin);
     };
 
     $scope.edit = function(pelicula) {
@@ -66,7 +66,7 @@
 
   }])  
 
-  app.controller('addFormController', ['$scope','$http', function($scope,$http) {
+  app.controller('addFormController', ['$scope','$http', function($scope, $http) {
     $scope.master = {};
     $scope.update = function(pelicula) {
       var to_list = pelicula.genres;
