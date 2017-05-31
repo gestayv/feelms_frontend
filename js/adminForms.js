@@ -19,33 +19,35 @@
     $scope.showInfo = function(pelicula) {
       var generos = pelicula.genres;
       var director = pelicula.director.id.toString();
-      //var admin = pelicula.admin.id.toString();
-      //var keywords = pelicula.keywords;
-
-      var genre = generos[0].id;
-      for (var i = 1; i < generos.length; i++) {
-        genre =  genre + "," + generos[i].id;
+      var keyterms = pelicula.keyterms;
+      
+      if (generos.length >= 1) {  // Se verifica si es que posee generos o no (caso improbable, pero de suceder se podría todo)
+        var genre = generos[0].id;
+        for (var i = 1; i < generos.length; i++) {
+          genre =  genre + "," + generos[i].id;
+        }
+      }
+      
+      if(keyterms.length >= 1) {  // Se verifica si es que posee keywords o no (caso improbable, pero de suceder se podría todo)
+        var kt = keyterms[0].term;
+        for (var i = keyterms.length - 1; i >= 1; i--) {
+          kt = kt + ',' + keyterms[i].term;
+        };
       }
 
-      /*var kw = keywords[0];
-      for (var i = keywords.length - 1; i >= 1; i--) {
-        kw = ',' + keywords[i];
-      };*/
-
       $scope.pelicula = angular.copy(pelicula);
-
       $scope.pelicula.genres = angular.copy(genre);
       $scope.pelicula.director = angular.copy(director);
-      //$scope.pelicula.admin = angular.copy(admin);
+      $scope.pelicula.keyterms = angular.copy(kt);
     };
 
     $scope.edit = function(pelicula) {
       var to_list = pelicula.genres;
       to_list = to_list.split(",");
       pelicula.genres = to_list;
-      var to_list = pelicula.keywords;
+      var to_list = pelicula.keyterms;
       to_list = to_list.split(",");
-      pelicula.keywords = to_list;
+      pelicula.keyterms = to_list;
       $scope.master = angular.copy(pelicula);
       var req = {
        method: 'POST',
@@ -63,7 +65,7 @@
     };
   }])
 
-  app.controller('addFormController', ['$scope','$http', function($scope,$http) {
+  app.controller('addFormController', ['$scope','$http', function($scope, $http) {
     $scope.master = {};
     $scope.update = function(pelicula) {
       var to_list = pelicula.genres;

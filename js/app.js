@@ -3,12 +3,13 @@
 var app = angular.module("feelms",["ui.router", "d3"]);
 angular.module('d3', []);
 
-	app.config(['$stateProvider', '$urlRouterProvider', registerRoutes]);
+	app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', registerRoutes]);
 	app.run(['$rootScope', '$location', function($rootScope, $location) {
 	  $rootScope.$location = $location;
 	}]);
 
-	function registerRoutes($stateProvider, $urlRouterProvider) {
+	function registerRoutes($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
+	  $sceDelegateProvider.resourceUrlWhitelist(['https://www.youtube.com/embed/*?rel=0', 'self']);
   	  $urlRouterProvider.otherwise('/');
 	  $stateProvider
 	    .state('home', {
@@ -18,6 +19,10 @@ angular.module('d3', []);
 	    .state('rank', {
 	    	url: '/',
 	    	templateUrl: 'vistas/rank.html'
+	    })
+	    .state('genresRank', {
+	    	url: '/',
+	    	templateUrl: 'vistas/genres.html'
 	    })
 	    .state('admin', {
 	    	url: '/',
