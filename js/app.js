@@ -1,3 +1,5 @@
+'use strict';
+
 var app = angular.module("feelms",["ui.router", "d3"]);
 angular.module('d3', []);
 

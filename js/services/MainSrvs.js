@@ -35,7 +35,6 @@ angular.module('feelms')
 
 	   		var url = urlBase + "/feelms/api/top/"+ cant_peliculas + "/days/" + cant_dias;
 
-	   		console.log(url);
 	    	return $http.get(url);
 
 	    }
@@ -46,8 +45,7 @@ angular.module('feelms')
 	   	// Ejemplo de llamado: /feelms/api/search/{query}/{limit}
 	   	this.GET_Search_Results = function(query, limit) {
 	   		var url = urlBase + "/feelms/api/search/" + query + "/" + limit;
-	   		
-	   		console.log(url)
+
 	   		return $http.get(url);
 	   	}
 
@@ -57,7 +55,6 @@ angular.module('feelms')
 	   	this.GET_Peliculas = function() {
 	   		var url = urlBase + "/feelms/api/films";
 
-	   		console.log(url);
 	   		return $http.get(url);
 	   	}
 

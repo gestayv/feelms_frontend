@@ -90,13 +90,10 @@ app.controller("filmController", function($scope, $stateParams, $http, GETServic
         .then(function(respuesta){
 
             $scope.data_pelicula = respuesta.data;
-            console.log(respuesta.data);
         }, function(error){console.log(error)});
 
     }
-    console.log($stateParams.peliculaId);
     $scope.ID = $stateParams.peliculaId;
-    console.log($scope.ID);
     GET_Info_Pelicula($stateParams.peliculaId);
 });
 
@@ -123,7 +120,6 @@ app.controller('topController', function($scope, $http, GETService) {
             {
                 $scope.data_tweets_popularidad = respuesta.data;
             }
-            console.log(respuesta.data);
         }, function(error){console.log(error)});
 
     }
