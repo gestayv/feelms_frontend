@@ -1,6 +1,14 @@
 var app = angular.module("feelms");
 
-app.controller("formController", function($scope,$http) {
+app.controller("comparisonModalController", function($scope, $state) {
+    $scope.comparisonView = function() {
+        $("#compare").modal('hide');
+        $('.modal-backdrop').hide();
+        $state.go("comparison");
+    }
+});
+
+/*app.controller("formController", function($scope,$http) {
     $scope.master = {};
     $scope.update = function(pelicula) {
       var to_list = pelicula.genres;
@@ -51,7 +59,7 @@ app.controller("formController", function($scope,$http) {
         $scope.text_keywords = '';
     };
 //$scope.reset();
-});
+});*/
 
 app.controller("searchResultsController", function($scope, $stateParams, $http, GETService) {
 

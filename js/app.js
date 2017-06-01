@@ -41,5 +41,9 @@ angular.module('d3', []);
 		.state('test', {
 	    	url: '/testD3',
 	    	templateUrl: 'vistas/test.html'
+	    })
+	    .state('comparison', {
+	    	url: '/',
+	    	templateUrl: 'vistas/compare.html'
 	    });
 	};

@@ -1,46 +1,46 @@
-    <!-- Header -->
-    <header-section></header-section>
-    <!-- TOP 10 -->
-    <section id="TOP">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Top 10 Películas</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-        </div>
+<!-- Header -->
+<header-section></header-section>
+<!-- TOP 10 -->
+<section id="TOP">
+    <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-lg-offset-2">
-                <div class="table-responsive">
-                    <table class="table table-hover" ng-controller="topController as topCtrl">
-                        <thead>
-                            <tr>
-                                <th>Posición</th>
-                                <th>Película</th>
-                                <th>Popularidad</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="pelicula in data_tweets_popularidad | orderBy:'-tweetCount' | limitTo: 10">
-                                <td>{{$index + 1}}</td>
-                                <td><a ui-sref="new-rp({ peliculaId: pelicula.filmId })">{{pelicula.filmTitle}}</a></td>
-                                <td>{{pelicula.tweetCount}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <img src="img/alien.jpg" height="460" alt="Alien">
+            <div class="col-lg-12 text-center">
+                <h2>Top 10 Películas</h2>
+                <hr class="star-primary">
             </div>
         </div>
-    </section>
-    <!-- Portfolio Grid Section -->
-    <portfolio-section></portfolio-section>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-2">
+            <div class="table-responsive">
+                <table class="table table-hover" ng-controller="topController as topCtrl">
+                    <thead>
+                        <tr>
+                            <th>Posición</th>
+                            <th>Película</th>
+                            <th>Popularidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="pelicula in data_tweets_popularidad | orderBy:'-tweetCount' | limitTo: 10">
+                            <td>{{$index + 1}}</td>
+                            <td><a ui-sref="new-rp({ peliculaId: pelicula.filmId })">{{pelicula.filmTitle}}</a></td>
+                            <td>{{pelicula.tweetCount}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <img src="img/alien.jpg" height="460" alt="Alien">
+        </div>
+    </div>
+</section>
+<!-- Portfolio Grid Section -->
+<portfolio-section></portfolio-section>
 
-    <!-- About Section -->
-    <about-section></about-section>
+<!-- About Section -->
+<about-section></about-section>
 
-    <!-- Contact Section -->
-    <contact-section></contact-section>
+<!-- Contact Section -->
+<contact-section></contact-section>
