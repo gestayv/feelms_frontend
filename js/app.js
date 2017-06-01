@@ -43,7 +43,8 @@ angular.module('d3', []);
 	    	templateUrl: 'vistas/test.html'
 	    })
 	    .state('comparison', {
-	    	url: '/',
-	    	templateUrl: 'vistas/compare.html'
+	    	url: '/compare/:firstId/:secondId',
+	    	templateUrl: 'vistas/compare.html',
+				controller: 'comparisonController'
 	    });
 	};

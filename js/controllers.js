@@ -1,65 +1,44 @@
 var app = angular.module("feelms");
 
-app.controller("comparisonModalController", function($scope, $state) {
-    $scope.comparisonView = function() {
-        $("#compare").modal('hide');
-        $('.modal-backdrop').hide();
-        $state.go("comparison");
+app.controller("comparisonController", function($scope, $stateParams, $http, GETService) {
+    $scope.id1 = $stateParams.firstId;
+    $scope.id2 = $stateParams.secondId;
+    function GET_Info_Pelicula(id_pelicula1,id_pelicula2){
+
+        GETService.GET_Info_Pelicula(id_pelicula1)
+        .then(function(respuesta){
+          $scope.data_pelicula1 = respuesta.data;
+        }, function(error){console.log(error)});
+
+
+        GETService.GET_Info_Pelicula(id_pelicula2)
+        .then(function(respuesta){
+          $scope.data_pelicula2 = respuesta.data;
+        }, function(error){console.log(error)});
     }
+    //$scope.data_pelicula1 = GET_Info_Pelicula($stateParams.firstId);
+    //$scope.data_pelicula2 = GET_Info_Pelicula($stateParams.secondId);
+    GET_Info_Pelicula($stateParams.firstId, $stateParams.secondId);
+
 });
 
-/*app.controller("formController", function($scope,$http) {
-    $scope.master = {};
-    $scope.update = function(pelicula) {
-      var to_list = pelicula.genres;
-      to_list = to_list.split(",");
-      pelicula.genres = to_list;
-      var to_list = pelicula.keywords;
-      to_list = to_list.split(",");
-      pelicula.keywords = to_list;
-      $scope.master = angular.copy(pelicula);
-      var req = {
-       method: 'POST',
-       url: 'http://131.221.33.124:8080/feelms/api/admin/add/film',
-       headers: {
-         'Content-Type': 'application/json'
-       },
-       data: $scope.master
-      }
-      $http(req).then(function(response){
-        console.log(response);
-      }, function(response){
-        console.log(response);
-      });
-    };
+app.controller("comparisonModalController", function($scope, $state, $http, GETService) {
+    $scope.comparisonView = function(id1, id2) {
+        $("#compare").modal('hide');
+        $('.modal-backdrop').hide();
+        $state.go("comparison", {firstId: id1, secondId: id2});
+    }
 
-    $scope.reset = function() {
-      $scope.pelicula = angular.copy($scope.master);
-    };
+    function GET_Peliculas(GETService) {
+      GETService.GET_Peliculas()
+      .then(function(respuesta) {
+        $scope.data_peliculas = respuesta.data;
+        console.log(respuesta.data);
+      }, function(error){console.log(error)});
+    }
+    GET_Peliculas(GETService);
 
-    $scope.list_genre = [];
-    //$scope.text_genre = 'hello';
-    $scope.submitgenres = function() {
-        if(angular.isArray($scope.pelicula.genre) == false)
-        {
-         $scope.pelicula.genre = [];
-        }
-        $scope.pelicula.genre.push(parseInt(this.text_genre));
-        $scope.list_genre.push(parseInt(this.text_genre));
-        $scope.text_genre = '';
-    };
-
-    $scope.submitkeywords = function() {
-        if(angular.isArray($scope.pelicula.keywords) == false)
-        {
-         $scope.pelicula.keywords = [];
-        }
-        $scope.pelicula.keywords.push(parseInt(this.text_keywords));
-        $scope.list_genre.push(parseInt(this.text_keywords));
-        $scope.text_keywords = '';
-    };
-//$scope.reset();
-});*/
+});
 
 app.controller("searchResultsController", function($scope, $stateParams, $http, GETService) {
 
@@ -101,7 +80,7 @@ app.controller("filmController", function($scope, $stateParams, $http, GETServic
         }, function(error){console.log(error)});
 
     }
-    $scope.ID = $stateParams.peliculaId;
+    $scope.firstID = $stateParams.peliculaId;
     GET_Info_Pelicula($stateParams.peliculaId);
 });
 
