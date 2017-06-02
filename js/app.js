@@ -38,8 +38,8 @@ angular.module('d3', []);
 	      templateUrl: 'vistas/film.html',
 	      controller: 'filmController'
 	    })
-		.state('test', {
-	    	url: '/testD3',
-	    	templateUrl: 'vistas/test.html'
+		.state('grafoPeliculas', {
+	    	url: '/',
+	    	templateUrl: 'vistas/grafo.html'
 	    });
 	};

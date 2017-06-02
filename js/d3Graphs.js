@@ -26,20 +26,24 @@ angular.module("d3")
     }]);
 
 angular.module("feelms")
-    .directive('d3Grafo', ["d3", function (d3) {
+    .directive('grafoTweets', ["d3", function (d3) {
         return {
             restrict: 'EA',
             scope:{},
             link: function(scope, element, attrs)
             {
                 d3.d3().then(function(d3){
+                    console.log("ACA");
+                    d3.json("json_test/data.json", function(error, data) {
+                        if (error) throw error;
+
                     scope.nodes =
-                    [{"name": "Travis", "sex": "M"},
-                    {"name": "Rake", "sex": "M"},
-                    {"name": "Diana", "sex": "F"},
-                    {"name": "Rachel", "sex": "F"},
-                    {"name": "Shawn", "sex": "M"},
-                    {"name": "Emerald", "sex": "F"}];
+                    [{"name": "Travis", "type": "M"},
+                    {"name": "Rake", "type": "M"},
+                    {"name": "Diana", "type": "U"},
+                    {"name": "Rachel", "type": "U"},
+                    {"name": "Shawn", "type": "M"},
+                    {"name": "Emerald", "type": "U"}];
 
                     scope.links =
                     [{"source": "Travis", "target": "Rake"},
@@ -50,12 +54,15 @@ angular.module("feelms")
                     {"source": "Emerald", "target": "Rachel"}];
 
 
-                    var width = 960, height = 500, radius = 8;
+                    var width = 960, height = 500;
 
-                    var svg = d3.select(element [0])
+                    var svg = d3.select(element[0])
                                 .append('svg')
                                 .attr('width', width)
-                                .attr('height', height);
+                                .attr('height', height)
+                                .attr('id', 'borde');
+
+                    //d3.select("#chart").attr("align","center");
 
                     var simulation = d3.forceSimulation().nodes(scope.nodes);
                     var link_force = d3.forceLink(scope.links).id(function(d){ return d.name; });
@@ -70,8 +77,7 @@ angular.module("feelms")
                     var g = svg.append("g")
                         .attr("class", "everything");
 
-                    d3.json("test_json/data.json", function(error, data) {
-                        if (error) throw error;
+
 
                         var link = g.append("g")
                             .attr("class", "link")
@@ -97,7 +103,7 @@ angular.module("feelms")
                             .on("mouseout", hover_end);
                         node
                             .append("circle")
-                            .attr("r", radius)
+                            .attr("r", circleRadius)
                             .attr("fill", circleColour);
 
                         node
@@ -125,10 +131,10 @@ angular.module("feelms")
 
                         function hover_on(d)
                 		{
-                			if(d.sex == "F")
+                			if(d.type == "U")
                 			{
                 				return tooltip
-                        				.text("-"+d.name+"\n-"+d.sex)
+                        				.text("-"+d.name+"\n-"+d.type)
                         				.style("visibility", "visible");
                 			}
                 		}
@@ -146,16 +152,28 @@ angular.module("feelms")
 
                 		function texto(d)
                 		{
-                			if(d.sex == "M")
+                			if(d.type == "M")
                 			{
                 				return d.name
                 			}
 
                 		}
 
+                        function circleRadius(d)
+                        {
+                            if(d.type == "M")
+                            {
+                                return 10;
+                            }
+                            else
+                            {
+                                return 7;
+                            }
+                        }
+
                 		function circleColour(d)
                 	    {
-                	    	if(d.sex == "M")
+                	    	if(d.type == "M")
                 	    	{
                 	    		return "blue";
                 	    	}
@@ -236,7 +254,7 @@ angular.module("feelms")
                 d3.d3().then(function(d3)
                 {
 
-                    var width = 580, height = 360;
+                    var width = 560, height = 360;
 
                     var margin = {top: 20, right: 20, bottom: 30, left: 40};
 
@@ -261,7 +279,6 @@ angular.module("feelms")
                     var g = svg.append("g")
                         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
                     scope.$watch('film', function (newVal) {
-                        console.log('film', newVal);
 
                     urlBase = "http://131.221.33.124:8080/feelms/api/films/"+scope.film+"/tweets/count/7";
                     // Moldeamos los datos de entrada
@@ -352,8 +369,8 @@ angular.module("feelms")
                             var x0 = x.invert(d3.mouse(this)[0]),
                             i = bisectDate(data, x0, 1),
                             d0 = data[i - 1],
-                            d1 = data[i],
-                            d = x0 - d0.year > d1.year - x0 ? d1 : d0;
+                            d1 = data[i];
+                            var d = x0 - d0.year > d1.year - x0 ? d1 : d0;
                         focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")");
                         focus.select("text").text(function() { return d.value; });
                         focus.select(".x-hover-line").attr("y2", height - y(d.value));

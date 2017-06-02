@@ -13,8 +13,9 @@
 	font-family: Helvetica
 }
 
-svg {
-  border:1px solid black;
+#borde {
+	border: 2px solid black;
+	margin:	auto;
 }
 
 #rcorners6{
