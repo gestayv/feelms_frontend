@@ -41,5 +41,10 @@ angular.module('d3', []);
 		.state('grafoPeliculas', {
 	    	url: '/',
 	    	templateUrl: 'vistas/grafo.html'
+	    })
+	    .state('comparison', {
+	    	url: '/compare/:firstId/:secondId',
+	    	templateUrl: 'vistas/compare.html',
+				controller: 'comparisonController'
 	    });
 	};
