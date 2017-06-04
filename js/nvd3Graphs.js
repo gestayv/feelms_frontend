@@ -1,10 +1,11 @@
 angular.module("d3v3")
     .factory("d3v3", ['$document', '$q', '$rootScope',
     function($document, $q, $rootScope) {
+        console.log("Loading D3V3");
         var d = $q.defer();
         function onScriptLoad() {
           // Load client in the browser
-          $rootScope.$apply(function() { d.resolve(window.d3v3); });
+          $rootScope.$apply(function() { d.resolve(window.d3); });
         }
         // Create a script tag with d3 as the source
         // and call our onScriptLoad callback when it
@@ -69,7 +70,7 @@ angular.module("feelms")
             link: function(scope, element, attrs)
             {
                 var urlBase;
-                d3v3.d3().then(function(d3v3)
+                d3v3.d3().then(function(d3)
                 {
                     if(true){
 

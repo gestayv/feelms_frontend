@@ -1,10 +1,11 @@
 angular.module("d3_v4")
     .factory("d3_v4Service", ['$document', '$q', '$rootScope',
     function($document, $q, $rootScope) {
+        console.log("Loading D3V4");
         var d = $q.defer();
         function onScriptLoad() {
           // Load client in the browser
-          $rootScope.$apply(function() { d.resolve(window.d3_v4); });
+          $rootScope.$apply(function() { d.resolve(window.d3); });
         }
         // Create a script tag with d3 as the source
         // and call our onScriptLoad callback when it
@@ -32,7 +33,7 @@ angular.module("feelms")
             scope:{},
             link: function(scope, element, attrs)
             {
-                d3_v4Service.d3().then(function(d3_v4){
+                d3_v4Service.d3().then(function(d3){
                     console.log("ACA");
                     d3.json("json_test/data.json", function(error, data) {
                         if (error) throw error;
@@ -251,7 +252,7 @@ angular.module("feelms")
             link: function(scope, element, attrs)
             {
                 var urlBase;
-                d3_v4Service.d3().then(function(d3_v4)
+                d3_v4Service.d3().then(function(d3)
                 {
 
                     var width = 560, height = 360;
