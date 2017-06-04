@@ -1,7 +1,12 @@
 'use strict';
 
-var app = angular.module("feelms",["ui.router", "d3"]);
-angular.module('d3', []);
+var app = angular.module("feelms",["ui.router", "d3v4","d3v3","nv"]);
+angular.module('d3v4', []);
+angular.module('d3v3', []);
+angular.module('nv', []);
+
+
+
 
 	app.config(['$stateProvider', '$urlRouterProvider', '$sceDelegateProvider', registerRoutes]);
 	app.run(['$rootScope', '$location', function($rootScope, $location) {
