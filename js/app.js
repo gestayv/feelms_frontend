@@ -1,7 +1,7 @@
 'use strict';
 
-var app = angular.module("feelms",["ui.router", "d3v4","d3v3","nv"]);
-angular.module('d3v4', []);
+var app = angular.module("feelms",["ui.router", "d3_v4","d3v3","nv"]);
+angular.module('d3_v4', []);
 angular.module('d3v3', []);
 angular.module('nv', []);
 
