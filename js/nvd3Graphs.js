@@ -78,10 +78,8 @@ angular.module("feelms")
 
                         scope.$watch('film2', function(newVal2){
 
-                        console.log(newVal1);
                         if(angular.isDefined(newVal1) && angular.isDefined(newVal2))
                         {
-                            console.log("DEFINIDO? "+newVal1+"-"+newVal2);
                             var data1= [];
                             var data2= [];
                             var data = [];

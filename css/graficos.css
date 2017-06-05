@@ -71,3 +71,7 @@ body {
 	overflow:auto;
 	height: 400px;
 }
+
+#chart1 svg {
+  height: 400px;
+}

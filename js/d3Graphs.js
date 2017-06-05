@@ -12,7 +12,7 @@ angular.module("d3_v4")
         // has been loaded
         var scriptTag = $document[0].createElement('script');
         scriptTag.type = 'text/javascript';
-        scriptTag.src = 'https://d3js.org/d3.v4.min.js';
+        scriptTag.src = 'https://d3js.org/d3.v4.js';
         scriptTag.onreadystatechange = function () {
           if (this.readyState == 'complete') onScriptLoad();
         }
@@ -221,7 +221,7 @@ angular.module("feelms")
             }
         };
     }])
-    .directive('graficoTweets', ["d3_v4Service", function(d3_v4Service){
+.directive('graficoTweets', ["d3_v4Service", function(d3_v4Service){
         return {
             restrict: 'EA',
             scope:{
@@ -360,4 +360,66 @@ angular.module("feelms")
             });//Fin promesa d3
         }
     };
+}])
+.directive('graficotorta', ['d3v3','nv', function(d3v3, nv) {
+        return {
+            restrict: 'EA',
+            scope:{
+                film: '@'
+            },
+            link: function(scope, element, attrs)
+            {
+                var urlBase;
+                d3v3.d3().then(function(d3)
+                {
+                    if(true){
+
+                        nv.nv().then(function(nv)
+                        {
+                            scope.$watch('film', function()
+                            {
+                                urlBase = "http://131.221.33.124:8080/feelms/api/films/"+scope.film+"/sentiments/7";
+                                d3.json(urlBase, function(error, data){
+                                    if(error) throw error;
+
+                                    var datosReales =
+                                    [
+                                        {
+                                            "label":"Tweets Positivos",
+                                            "value":data.pos
+                                        },
+                                        {
+                                            "label":"Tweets Negativos",
+                                            "value":data.neg
+                                        },
+                                        {
+                                            "label":"Tweets Neutros",
+                                            "value":1-(data.pos+data.neg)
+                                        }
+                                    ];
+
+                                    nv.addGraph(function() {
+                                      var chart = nv.models.pieChart()
+                                          .x(function(d) { return d.label })
+                                          .y(function(d) { return d.value })
+                                          .showLabels(true)
+                                          .color(['green', 'red', 'gray']);
+
+                                        d3.select("#chart1 svg")
+                                            .datum(datosReales)
+                                            .transition().duration(350)
+                                            .call(chart);
+
+
+
+                                      return chart;
+                                    });
+                                });
+                            });
+                        });
+                    };
+                });// d3 json
+            }
+        } // return
+
     }]);

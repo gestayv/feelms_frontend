@@ -140,32 +140,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Tweets Destacados</h2>
+                    <h2>Recepción</h2>
                     <hr class="star-light">
                 </div>
             </div>
-            <div class="list-group">
-              <a href="#" class="list-group-item ">
-                <h4 class="list-group-item-heading"> laslo rojas‏ <small>@amnesico 9 h</small></h4>
-                <p class="list-group-item-text">Excelente #AlienCovenant Le hace honor al espíritu del clásico que precede. Fassbender, denle su doble Oscar ya!</p>
-              </a>
-              <a href="#" class="list-group-item ">
-                <h4 class="list-group-item-heading">  Matias Villar‏ <small>@MatiNickk 5 h</small></h4>
-                <p class="list-group-item-text">He visto críticas no muy buenas de <b>Alien Covenant</b> pero nada me quita el hype por la peli , iré igual al cine a verla</p>
-              </a>
-              <a href="#" class="list-group-item ">
-                <h4 class="list-group-item-heading">  Francisco Javier‏ <small>@creativok 6 h</small></h4>
-                <p class="list-group-item-text">Ohhhh parece que #AlienCovenant está 50/50 en críticas pero levemente mejores que Prometheus, entre que defrauda pero tiene sus momentos...</p>
-              </a>
-              <a href="#" class="list-group-item ">
-                <h4 class="list-group-item-heading"> Licenciada Del Mazo <small>PacoDelMazo 8 may.</small></h4>
-                <p class="list-group-item-text">¿Quién me lleva a ver <b>Alien Covenant</b>? ME URGE</p>
-              </a>
-              <a href="#" class="list-group-item ">
-                <h4 class="list-group-item-heading"> Blog de Cine‏<small>@blogdecine 10 h</small></h4>
-                <p class="list-group-item-text">Crítica sin spoilers de #AlienCovenant: una decepción aún mayor que 'Prometheus' https://www.blogdecine.com/p/98418</p>
-              </a>
-              <button type="button" class="pull-right btn btn-primary">Ver Más</button>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.5/nv.d3.min.css" rel="stylesheet" type="text/css">
+            <graficotorta film="{{data_pelicula.id}}"></graficotorta>  <!-- ACA VA D3 -->
+            <div id="chart1" align="center">
+                <svg></svg>
             </div>
         </div>
     </section>
