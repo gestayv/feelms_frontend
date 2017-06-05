@@ -104,7 +104,7 @@ angular.module("feelms")
                                     var celda = [];
                                     var values = [];
                                     var data_obj = {};
-                                
+
                                     //console.log(data1);
                                     //console.log(data2);
 
@@ -141,10 +141,10 @@ angular.module("feelms")
                                   var chart = nv.models.lineChart()
                                     //.x(function(d) { return d[0] })
                                     .xScale(d3.time.scale())
-                                    .x( function(d){ 
+                                    .x( function(d){
                                         return Date.parse(d[0]) ;} )
                                     //adjusting, 100% is 1.00, not 100 as it is in the data
-                                    .y(function(d) { 
+                                    .y(function(d) {
                                         //console.log(d[1]);
                                         return d[1] })
                                     .color(d3.scale.category10().range())
@@ -161,7 +161,7 @@ angular.module("feelms")
                                 .tickFormat(function(d) {
                                     return d3.format(',.2f')(d);
                                 });
-                               
+
 
                                  /* chart.xAxis
                                     .tickFormat(function(d) {
@@ -191,6 +191,6 @@ angular.module("feelms")
                     };
                 });// d3 json
             }
-        } // return 
+        } // return
 
     }]); //directive
