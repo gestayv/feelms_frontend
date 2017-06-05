@@ -37,7 +37,7 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" ng-controller="adminViewController">
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
@@ -58,6 +58,7 @@
                         <input type="text" ng-model="query" class="form-control" placeholder="Buscador de películas" required>
                       </div>
                       <button type="submit" class="btn" ng-click="search()">Buscar</button>
+                      <button type="button" class="btn" ng-click="showAdminView()">Admin</button>
                     </form>
                 </ul>
             </div>
@@ -103,7 +104,7 @@
     <script src="js/nvd3Graphs.js"></script>
     <script src="js/controllers.js"></script>
 
-    
+
 
 </body>
 </html>

@@ -31,7 +31,8 @@ angular.module('nv', []);
 	    })
 	    .state('admin', {
 	    	url: '/',
-	    	templateUrl: 'vistas/admin.html'
+	    	templateUrl: 'vistas/admin.html',
+				controller: 'filmsController'
 	    })
 	    .state('searchResults', {
 	    	url: '/search/:query',
