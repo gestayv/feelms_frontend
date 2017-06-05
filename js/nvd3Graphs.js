@@ -63,40 +63,43 @@ angular.module("feelms")
                 film2: '@',
                 title1: '@',
                 title2: '@'
-
-
-
             },
             link: function(scope, element, attrs)
             {
-                var urlBase;
+
                 d3v3.d3().then(function(d3)
                 {
                     if(true){
 
-
                     nv.nv().then(function(nv)
                     {
-                        var data1= [];
-                        var data2= [];
-                        var data = [];
 
-                        urlBase = "http://131.221.33.124:8080/feelms/api/films/"+scope.film1+"/tweets/count/7";
-                        urlBase2 = "http://131.221.33.124:8080/feelms/api/films/"+scope.film2+"/tweets/count/7";
-                        console.log(urlBase);
-                        console.log(urlBase2);
+                        scope.$watch('film1', function(newVal1){
+
+                        scope.$watch('film2', function(newVal2){
+
+                        console.log(newVal1);
+                        if(angular.isDefined(newVal1) && angular.isDefined(newVal2))
+                        {
+                            console.log("DEFINIDO? "+newVal1+"-"+newVal2);
+                            var data1= [];
+                            var data2= [];
+                            var data = [];
+
+                            var urlBase = "http://131.221.33.124:8080/feelms/api/films/"+scope.film1+"/tweets/count/7";
+                            var urlBase2 = "http://131.221.33.124:8080/feelms/api/films/"+scope.film2+"/tweets/count/7";
 
                             if(true)
                             {
 
 
-                           d3.json(urlBase, function(error, data1) {
+                            d3.json(urlBase, function(error, data1) {
 
                             this.data1 = data1;
                             if(true)
                             {
 
-                              d3.json(urlBase2, function(error, data2) {
+                            d3.json(urlBase2, function(error, data2) {
                             this.data2 = data2;
                             if(true)
                             {
@@ -105,9 +108,6 @@ angular.module("feelms")
                                     var values = [];
                                     var data_obj = {};
 
-                                    //console.log(data1);
-                                    //console.log(data2);
-
                                     for(i=0;i<data1.length;i++)
                                     {
                                         celda = [];
@@ -115,7 +115,7 @@ angular.module("feelms")
                                         celda.push(data1[i].count);
                                         values.push(celda);
                                     };
-                                    //console.log(values);
+
                                     data_obj['key'] = scope.title1.split(" ")[0];
                                     data_obj['values'] = values;
                                     values = [];
@@ -133,7 +133,6 @@ angular.module("feelms")
                                     data_obj['values'] = values;
                                     data.push(data_obj);
                                     values = [];
-                                    //console.log(data);
 
 
                                 count = 0;
@@ -162,31 +161,24 @@ angular.module("feelms")
                                     return d3.format(',.2f')(d);
                                 });
 
-
-                                 /* chart.xAxis
-                                    .tickFormat(function(d) {
-                                      return d3.time.format('%x')(new Date(d))
-                                    });
-                                */
-                                  //chart.yAxis.tickFormat(d3.format("d"));
-
-                                 // chart.yAxis.tickFormat(d3.format("d"));
-
-                                  d3.select('#chart svg')
+                                d3.select('#chart svg')
                                     .datum(data)
                                     .transition().duration(500)
                                     .call(chart)
                                     ;
 
-                                  nv.utils.windowResize(chart.update);
+                                nv.utils.windowResize(chart.update);
 
-                                  return chart;
-                                    });
+                                return chart;
+                                });
                             };
                                 });
                                 };
                             });
                         };
+                    }
+                });//scope.watch film2
+                });//scope.watch film1
                     }); //nv json
                     };
                 });// d3 json

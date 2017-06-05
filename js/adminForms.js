@@ -20,14 +20,14 @@
       var generos = pelicula.genres;
       var director = pelicula.director.id.toString();
       var keyterms = pelicula.keyterms;
-      
+
       if (generos.length >= 1) {  // Se verifica si es que posee generos o no (caso improbable, pero de suceder se podría todo)
         var genre = generos[0].id;
         for (var i = 1; i < generos.length; i++) {
           genre =  genre + "," + generos[i].id;
         }
       }
-      
+
       if(keyterms.length >= 1) {  // Se verifica si es que posee keywords o no (caso improbable, pero de suceder se podría todo)
         var kt = keyterms[0].term;
         for (var i = keyterms.length - 1; i >= 1; i--) {
