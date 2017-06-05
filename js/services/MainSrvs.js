@@ -58,4 +58,15 @@ angular.module('feelms')
 	   		return $http.get(url);
 	   	}
 
+	   	//Entrada : Cantida Géneros, Cantidad dias
+	    //Salida : TOP X de génres a partir de cantidad de tweets en Y días
+	    // Ejemplo de llamado: /feelms/api/top/genres/{cantidad}/days/{days}
+		this.GET_TOP_Genres = function(cant_genres, cant_dias){
+
+	   		var url = urlBase + "/feelms/api/top/genres/"+ cant_genres + "/days/" + cant_dias;
+
+	    	return $http.get(url);
+
+	    }
+
 	});
