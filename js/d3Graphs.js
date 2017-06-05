@@ -35,25 +35,9 @@ angular.module("feelms")
             {
                 d3_v4Service.d3().then(function(d3){
                     console.log("ACA");
-                    d3.json("json_test/data.json", function(error, data) {
+                    urlBase = "http://131.221.33.124:8080/feelms/api/films/graph/1&2&3&4&5/from/2";
+                    d3.json(urlBase, function(error, data) {
                         if (error) throw error;
-
-                    scope.nodes =
-                    [{"name": "Travis", "type": "M"},
-                    {"name": "Rake", "type": "M"},
-                    {"name": "Diana", "type": "U"},
-                    {"name": "Rachel", "type": "U"},
-                    {"name": "Shawn", "type": "M"},
-                    {"name": "Emerald", "type": "U"}];
-
-                    scope.links =
-                    [{"source": "Travis", "target": "Rake"},
-                    {"source": "Diana", "target": "Rake"},
-                    {"source": "Diana", "target": "Rachel"},
-                    {"source": "Rachel", "target": "Rake"},
-                    {"source": "Rachel", "target": "Shawn"},
-                    {"source": "Emerald", "target": "Rachel"}];
-
 
                     var width = 960, height = 500;
 
@@ -65,11 +49,11 @@ angular.module("feelms")
 
                     //d3.select("#chart").attr("align","center");
 
-                    var simulation = d3.forceSimulation().nodes(scope.nodes);
-                    var link_force = d3.forceLink(scope.links).id(function(d){ return d.name; });
+                    var simulation = d3.forceSimulation().nodes(data.nodes);
+                    var link_force = d3.forceLink(data.links).id(function(d){ return d.name; });
 
                     simulation
-                        .force("charge_force", d3.forceManyBody().strength(-200))
+                        .force("charge_force", d3.forceManyBody().strength(-50))
                         .force("center_force", d3.forceCenter(width/2, height/2))
                         .force("links", link_force);
 
@@ -83,7 +67,7 @@ angular.module("feelms")
                         var link = g.append("g")
                             .attr("class", "link")
                             .selectAll("line")
-                            .data(scope.links)
+                            .data(data.links)
                             .enter().append("line")
                             .attr("stroke-width", 2)
                             .style("stroke", linkColour);
@@ -91,7 +75,7 @@ angular.module("feelms")
                         var node = g.append("g")
                            .attr("class", "node")
                            .selectAll("circle")
-                           .data(scope.nodes)
+                           .data(data.nodes)
                            .enter()
                            .append("g")
                            .attr("transform",
@@ -107,9 +91,7 @@ angular.module("feelms")
                             .attr("r", circleRadius)
                             .attr("fill", circleColour);
 
-                        node
-                            .append("text")
-                            .text(texto);
+
 
                         var tooltip = d3.select("body")
                             .append("div")
@@ -132,11 +114,17 @@ angular.module("feelms")
 
                         function hover_on(d)
                         {
-                            if(d.type == "U")
+                            if(d.type == "u")
                             {
                                 return tooltip
-                                        .text("-"+d.name+"\n-"+d.type)
-                                        .style("visibility", "visible");
+                                            .text("Usuario: @"+d.name)
+                                            .style("visibility", "visible");
+                            }
+                            else
+                            {
+                                return tooltip
+                                            .text("Película: "+d.name)
+                                            .style("visibility", "visible");
                             }
                         }
 
@@ -153,7 +141,7 @@ angular.module("feelms")
 
                         function texto(d)
                         {
-                            if(d.type == "M")
+                            if(d.type == "m")
                             {
                                 return d.name
                             }
@@ -162,9 +150,9 @@ angular.module("feelms")
 
                         function circleRadius(d)
                         {
-                            if(d.type == "M")
+                            if(d.type == "m")
                             {
-                                return 10;
+                                return 15;
                             }
                             else
                             {
@@ -174,7 +162,7 @@ angular.module("feelms")
 
                         function circleColour(d)
                         {
-                            if(d.type == "M")
+                            if(d.type == "m")
                             {
                                 return "blue";
                             }
@@ -186,36 +174,26 @@ angular.module("feelms")
 
                         function linkColour(d)
                         {
-                            if(d.type == "E")
-                            {
-                                return "red";
-                            }
-                            else
-                            {
-                                return "green";
-                            }
+                            return "red";
                         }
 
                         function drag_start(d){
                             if(!d3.event.active) simulation.alphaTarget(0.3).restart();
-                            tooltip.style("top",
-                                    (d3.event.y-10)+"px").style("left",(d3_v4.event.x+10)+"px");
+                            tooltip.style("visibility", "hidden");
                             d.fx = d.x;
                             d.fy = d.y;
                         }
 
                         function drag_drag(d)
                         {
-                            tooltip.style("top",
-                                    (d3.event.y-10)+"px").style("left",(d3.event.x+10)+"px");
+                            tooltip.style("visibility", "hidden");
                             d.fx = d3.event.x;
                             d.fy = d3.event.y;
                         }
 
                         function drag_end(d){
                             if(!d3.event.active) simulation.alphaTarget(0);
-                            tooltip.style("top",
-                                    (d3.event.y-10)+"px").style("left",(d3.event.x+10)+"px");
+                            tooltip.style("visibility", "hidden");
                             d.fx = null;
                             d.fy = null;
                         }
