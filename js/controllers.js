@@ -117,7 +117,35 @@ app.controller('topController', function($scope, $http, GETService) {
     //	Que el ranking que se muestra en home sea anual.
     GET_TOP_Peliculas(10,365);
 });
+app.controller('genresController',function($scope,$http,GETService){
 
+    function GET_TOP_Genres(cant_genres, cant_dias){
+        GETService.GET_TOP_Genres(cant_genres, cant_dias)
+        .then(function(respuesta){
+            if(cant_dias == 1)
+            {
+                $scope.ranking_diario = respuesta.data;
+            }
+            else if (cant_dias == 7)
+            {
+                $scope.ranking_semanal = respuesta.data;
+            }
+            else if(cant_dias == 30)
+            {
+                $scope.ranking_mensual = respuesta.data;
+            }
+            else
+            {
+                $scope.data_genres_popularidad = respuesta.data;
+            }
+        }, function(error){console.log(error)});
+    }
+
+    GET_TOP_Genres(10, 1);
+    GET_TOP_Genres(10, 7);
+    GET_TOP_Genres(10, 30);
+
+});
 app.directive('headerSection', function() {
     return {
         restrict: 'E',

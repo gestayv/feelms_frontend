@@ -47,7 +47,7 @@
                       </ul>
 
                       <!-- Tab panes -->
-                      <div class="tab-content" ng-controller="topController as topCtrl">
+                      <div class="tab-content" ng-controller="genresController as genreCtrl">
                           <div role="tabpanel" class="tab-pane active" id="yesterday">
                               <div class="col-lg-4 col-lg-offset-2"> <br>
                                <div class="table-responsive">
@@ -56,12 +56,14 @@
                                         <tr>
                                           <th>Lugar</th>
                                           <th>Género</th>
+                                          <th>Popularidad</th>
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <tr ng-repeat="pelicula in ranking_diario | orderBy:'-pop' | limitTo: 10">
+                                        <tr ng-repeat="genre in ranking_diario | orderBy:'-pop' | limitTo: 10">
                                             <td>{{$index + 1}}</td>
-                                            <td><a ui-sref="new-rp({ peliculaId: pelicula.filmId })">{{pelicula.filmTitle}}</a></td>
+                                            <td>{{genre.filmTitle}}</td>
+                                            <td>{{genre.tweetCount}}</td>
                                         </tr>
                                       </tbody>
                                   </table>
@@ -76,12 +78,14 @@
                                         <tr>
                                           <th>Lugar</th>
                                           <th>Género</th>
+                                          <th>Popularidad</th>
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <tr ng-repeat="pelicula in ranking_semanal | orderBy:'-pop' | limitTo: 10">
+                                        <tr ng-repeat="genre in ranking_semanal | orderBy:'-pop' | limitTo: 10">
                                             <td>{{$index + 1}}</td>
-                                            <td><a ui-sref="new-rp({ peliculaId: pelicula.filmId })">{{pelicula.filmTitle}}</a></td>
+                                            <td>{{genre.filmTitle}}</td>
+                                            <td>{{genre.tweetCount}}</td>
                                         </tr>
                                       </tbody>
                                   </table>
@@ -97,12 +101,14 @@
                                         <tr>
                                           <th>Lugar</th>
                                           <th>Género</th>
+                                          <th>Popularidad</th>
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <tr ng-repeat="pelicula in ranking_mensual | orderBy:'-pop' | limitTo: 10">
+                                        <tr ng-repeat="genre in ranking_mensual | orderBy:'-pop' | limitTo: 10">
                                             <td>{{$index + 1}}</td>
-                                            <td><a ui-sref="new-rp({ peliculaId: pelicula.filmId })">{{pelicula.filmTitle}}</a></td>
+                                            <td>{{genre.filmTitle}}</td>
+                                            <td>{{genre.tweetCount}}</td>
                                         </tr>
                                       </tbody>
                                   </table>
