@@ -39,30 +39,27 @@ angular.module("feelms")
                     d3.json(urlBase, function(error, data) {
                         if (error) throw error;
 
-                    var width = 960, height = 500;
+                        var width = 960, height = 500;
 
-                    var svg = d3.select(element[0])
-                                .append('svg')
-                                .attr('width', width)
-                                .attr('height', height)
-                                .attr('id', 'borde');
-
-                    //d3.select("#chart").attr("align","center");
-
-                    var simulation = d3.forceSimulation().nodes(data.nodes);
-                    var link_force = d3.forceLink(data.links).id(function(d){ return d.name; });
-
-                    simulation
-                        .force("charge_force", d3.forceManyBody().strength(-50))
-                        .force("center_force", d3.forceCenter(width/2, height/2))
-                        .force("links", link_force);
-
-                    simulation.on("tick", tickActions);
-
-                    var g = svg.append("g")
-                        .attr("class", "everything");
+                        var svg = d3.select(element[0])
+                                    .append('svg')
+                                    .attr('width', width)
+                                    .attr('height', height)
+                                    .attr('id', 'borde');
 
 
+                        var simulation = d3.forceSimulation().nodes(data.nodes);
+                        var link_force = d3.forceLink(data.links).id(function(d){ return d.name; });
+
+                        simulation
+                            .force("charge_force", d3.forceManyBody().strength(-75))
+                            .force("center_force", d3.forceCenter(width/2, height/2))
+                            .force("links", link_force);
+
+                        simulation.on("tick", tickActions);
+
+                        var g = svg.append("g")
+                            .attr("class", "everything");
 
                         var link = g.append("g")
                             .attr("class", "link")
@@ -164,17 +161,17 @@ angular.module("feelms")
                         {
                             if(d.type == "m")
                             {
-                                return "blue";
+                                return "#FF5C19";
                             }
                             else
                             {
-                                return "red";
+                                return "#1221B2";
                             }
                         }
 
                         function linkColour(d)
                         {
-                            return "red";
+                            return "#000000";
                         }
 
                         function drag_start(d){
