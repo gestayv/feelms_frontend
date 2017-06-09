@@ -45,7 +45,7 @@ angular.module('nv', []);
 	      controller: 'filmController'
 	    })
 		.state('grafoPeliculas', {
-	    	url: '/',
+	    	url: '/films/graph',
 	    	templateUrl: 'vistas/grafo.html'
 	    })
 	    .state('comparison', {

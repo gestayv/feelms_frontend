@@ -86,7 +86,8 @@ angular.module("feelms")
                         node
                             .append("circle")
                             .attr("r", circleRadius)
-                            .attr("fill", circleColour);
+                            .attr("fill", circleColour)
+                            .on("click", redirectToUser);
 
 
 
@@ -108,6 +109,21 @@ angular.module("feelms")
                             .on("zoom", zoom_actions);
 
                         zoom_handler(svg);
+
+                        function redirectToUser(d)
+                        {
+                            if(d.type == "u")
+                            {
+                                var url = "https://twitter.com/"+d.name;
+                                window.open(url);
+                            }
+                            else if (d.type == "m")
+                            {
+                                //Aca debería ir la ruta de la película dentro de la misma aplicación.
+                                var url = "";
+                                //window.open(url);
+                            }
+                        }
 
                         function hover_on(d)
                         {
