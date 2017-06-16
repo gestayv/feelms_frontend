@@ -52,5 +52,9 @@ angular.module('nv', []);
 	    	url: '/compare/:firstId/:secondId',
 	    	templateUrl: 'vistas/compare.html',
 				controller: 'comparisonController'
-	    });
+	    })
+		.state('mapa',{
+			url:'/mapa',
+			templateUrl: 'vistas/mapa.html',
+		});
 	};

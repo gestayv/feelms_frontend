@@ -35,7 +35,7 @@ angular.module("feelms")
             {
                 d3_v4Service.d3().then(function(d3){
                     console.log("ACA");
-                    urlBase = "http://131.221.33.124:8080/feelms/api/films/graph/1&2&3&4&5/from/2";
+                    urlBase = "http://131.221.33.124:8080/feelms/api/films/graph/1&2&3&4&5/from/3";
                     d3.json(urlBase, function(error, data) {
                         if (error) throw error;
 
@@ -165,7 +165,7 @@ angular.module("feelms")
                         {
                             if(d.type == "m")
                             {
-                                return 15;
+                                return 20;
                             }
                             else
                             {
@@ -177,17 +177,17 @@ angular.module("feelms")
                         {
                             if(d.type == "m")
                             {
-                                return "#FF5C19";
+                                return "#FEFA0D";
                             }
                             else
                             {
-                                return "#1221B2";
+                                return "#1276B2";
                             }
                         }
 
                         function linkColour(d)
                         {
-                            return "#000000";
+                            return "#253036";
                         }
 
                         function drag_start(d){
@@ -274,7 +274,8 @@ angular.module("feelms")
 
                     urlBase = "http://131.221.33.124:8080/feelms/api/films/"+scope.film+"/tweets/count/7";
                     // Moldeamos los datos de entrada
-                    d3.json(urlBase, function(error, data) {
+                    d3.json(urlBase, function(error, data)
+                    {
                         if (error) throw error;
 
                         data.forEach(function(d) {
@@ -368,9 +369,135 @@ angular.module("feelms")
                         focus.select(".x-hover-line").attr("y2", height - y(d.value));
                         focus.select(".y-hover-line").attr("x2", width + width);
                         }
-                });// d3 json
-            });// test watch
+                    });// d3 json
+                });// test watch
             });//Fin promesa d3
+        }
+    };
+}])
+.directive('mapaTweets', ["d3_v4Service", function(d3_v4Service){
+    return{
+        restrict: 'EA',
+        scope:{},
+        link: function(scope, element, attrs)
+        {
+            var urlBase;
+            d3_v4Service.d3().then(function(d3){
+
+                var color_domain = [50, 150, 350, 750, 1500]
+                var ext_color_domain = [0, 50, 150, 350, 750, 1500]
+                var legend_labels = ["< 50", "50+", "150+", "350+", "750+", "> 1500"]
+                var color = d3.scaleThreshold()
+                    .domain(color_domain)
+                    .range(["#adfcad", "#ffcb40", "#ffba00", "#ff7d73", "#ff4e40", "#ff1300"]);
+
+                var width = 960,
+                    height = 500;
+
+                var zoom = d3.zoom()
+                    .scaleExtent([1, 8])
+                    .on("zoom", move);
+
+                var svg = d3.select(element[0])
+                            .append("svg")
+                            .attr("class", "mapaT")
+                            .attr("width", width)
+                            .attr("height", height)
+                            .call(zoom);
+
+                var g = svg.append("g");
+
+                var projection = d3.geoMercator()
+                                .scale(width / 2 / Math.PI)
+                                .translate([width/2, height/2]);
+
+                var path = d3.geoPath()
+                            .projection(projection);
+
+                d3.json("./json_test/world-countries.json", function(err, data){
+
+                    d3.json("./json_test/test.json", function(err2, data2){
+                        var countries = topojson.feature(data, data.objects.countries1).features;
+                        g.selectAll(".country")
+                            .data(countries)
+                            .enter().append("path")
+                            .attr("class", "country")
+                            .style("fill", testF)
+                            .attr("d", path)
+                            .on("mouseover", hover_on)
+                            .on("mousemove", hover_move)
+                            .on("mouseout", hover_out);
+
+                        function testF(d)
+                        {
+                            var t = data2["paises"];
+                            for (var i = 0; i < t.length; i++) {
+                                if(d["properties"]["Alpha-2"] == t[i]["id"])
+                                {
+                                    console.log(t[i]["fill"])
+                                    return t[i]["fill"];
+                                }
+                            }
+                            return "#efefef";
+                        }
+
+                        var legend = svg.selectAll(".legend")
+                            .data(ext_color_domain)
+                            .enter().append("g")
+                            .attr("class", "legend");
+
+                        var ls_w = 20, ls_h = 20;
+
+                        legend.append("rect")
+                            .attr("x", 20)
+                            .attr("y", function(d, i){ return height - (i*ls_h) - 2*ls_h;})
+                            .attr("width", ls_w)
+                            .attr("height", ls_h)
+                            .style("fill", function(d, i) { return color(d); })
+                            .style("opacity", 0.8);
+
+                        legend.append("text")
+                            .attr("x", 50)
+                            .attr("y", function(d, i){ return height - (i*ls_h) - ls_h - 4;})
+                            .text(function(d, i){ return legend_labels[i]; });
+                    })
+                })
+
+                var tooltip = d3.select("body")
+                    .append("div")
+                    .style("position", "absolute")
+                    .style("z-index", "10")
+                    .style("visibility", "hidden")
+                    .attr("id", "rcorners6");
+
+                function hover_on(d)
+                {
+                    var props= d["properties"];
+                    return tooltip
+                            .text(props["name"]+" !")
+                            .style("visibility", "visible");
+                }
+
+                function hover_move(d)
+                {
+                    var m = [0, 0];
+                    m = d3.mouse(this);
+                    return tooltip.style("top",
+                            (d3.event.y)+"px").style("left",(d3.event.x)+"px");
+                }
+
+                function hover_out(d)
+                {
+                    return tooltip
+                            .style("visibility", "hidden");
+                }
+
+                function move()
+                {
+                    g.attr("transform", d3.event.transform);
+                }
+
+            });
         }
     };
 }])
