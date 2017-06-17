@@ -384,6 +384,7 @@ angular.module("feelms")
             var urlBase;
             d3_v4Service.d3().then(function(d3){
 
+                // Definir rangos y colores de manera dinámica.
                 var color_domain = [50, 150, 350, 750, 1500]
                 var ext_color_domain = [0, 50, 150, 350, 750, 1500]
                 var legend_labels = ["< 50", "50+", "150+", "350+", "750+", "> 1500"]
