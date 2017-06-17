@@ -10,6 +10,7 @@ angular.module("d3v3")
         // Create a script tag with d3 as the source
         // and call our onScriptLoad callback when it
         // has been loaded
+        window.d3 = undefined;
         var scriptTag = $document[0].createElement('script');
         scriptTag.type = 'text/javascript';
         scriptTag.src = '/js/d3v3.js';
@@ -37,6 +38,8 @@ angular.module("nv")
         // Create a script tag with d3 as the source
         // and call our onScriptLoad callback when it
         // has been loaded
+
+        window.nv = undefined;
         var scriptTag = $document[0].createElement('script');
         scriptTag.type = 'text/javascript';
         scriptTag.src = '/js/nv.d3.js';
@@ -120,7 +123,7 @@ angular.module("feelms")
                                     data.push(data_obj);
                                     data_obj = {};
 
-                                    for(i=0;i<data2.length-1;i++)
+                                    for(i=0;i<data2.length;i++)
                                     {
                                         celda = [];
                                         celda.push(data2[i].date);

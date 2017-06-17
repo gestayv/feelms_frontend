@@ -10,9 +10,11 @@ angular.module("d3_v4")
         // Create a script tag with d3 as the source
         // and call our onScriptLoad callback when it
         // has been loaded
+
+        window.d3 = undefined;
         var scriptTag = $document[0].createElement('script');
         scriptTag.type = 'text/javascript';
-        scriptTag.src = 'https://d3js.org/d3.v4.js';
+        scriptTag.src = '/js/d3.v4.js';
         scriptTag.onreadystatechange = function () {
           if (this.readyState == 'complete') onScriptLoad();
         }
