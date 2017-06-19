@@ -54,7 +54,7 @@ angular.module('nv', []);
 				controller: 'comparisonController'
 	    })
 		.state('mapa',{
-			url:'/mapa',
+			url:'/mapa/:idPelicula',
 			templateUrl: 'vistas/mapa.html',
 		});
 	};
