@@ -377,6 +377,106 @@ angular.module("feelms")
         }
     };
 }])
+.directive('graficoDep', ['d3v3','nv', function(d3v3, nv) {
+    return {
+        restrict: 'EA',
+        scope:{
+            film1: '@'
+        },
+        link: function(scope, element, attrs)
+        {
+            d3v3.d3().then(function(d3)
+            {
+                if(true)
+                {
+
+                    nv.nv().then(function(nv)
+                    {
+                        scope.$watch('film1', function(nval){
+
+                        var urlBase = "http://131.221.33.124:8080/feelms/api/films/"+scope.film1+"/tweets/count/7";
+
+                        if(true)
+                        {
+
+
+                            d3.json(urlBase, function(error, data1) {
+
+                            var dataG= [];
+                            var data = [];
+
+                            dataG = data1;
+                            console.log("datos");
+                            console.log(dataG);
+                            if(true)
+                            {
+
+                                var celda = [];
+                                var values = [];
+                                var data_obj = {};
+
+                                for(i=0;i<dataG.length;i++)
+                                {
+                                    celda = [];
+                                    celda.push(dataG[i].date);
+                                    celda.push(dataG[i].count);
+                                    values.push(celda);
+                                };
+                                data_obj['key'] = "Tweets";
+                                data_obj['values'] = values;
+                                values = [];
+                                data.push(data_obj);
+                                data_obj = {};
+
+                                count = 0;
+                                nv.addGraph(function() {
+                                    var chart = nv.models.lineChart()
+                                    //.x(function(d) { return d[0] })
+                                    .xScale(d3.time.scale())
+                                    .x( function(d){
+                                        return Date.parse(d[0]) ;} )
+                                    //adjusting, 100% is 1.00, not 100 as it is in the data
+                                    .y(function(d) {
+                                        //console.log(d[1]);
+                                        return d[1] })
+                                    .color(d3.scale.category10().range())
+                                    .useInteractiveGuideline(true)
+                                    ;
+
+                                chart.xAxis
+                                    .tickFormat(function(d) {
+                                    return d3.time.format("%d %b")(new Date(d))
+                                    });
+                                chart.yAxis
+                                    .tickFormat(function(d) {
+                                    return d3.format(',.2f')(d);
+                                    });
+
+
+
+                                d3.select(element[0])
+                                    .append("svg")
+                                    .attr("width", 500)
+                                    .attr("height", 300)
+                                    .datum(data)
+                                    .transition().duration(500)
+                                    .call(chart)
+                                    ;
+
+                                nv.utils.windowResize(chart.update);
+
+                                return chart;
+                                });
+                                };
+                            });
+                        };
+                    });
+                    }); //nv json
+                };
+            });// d3 json
+        }
+    } // return
+}])
 .directive('mapaTweets', ["d3_v4Service", function(d3_v4Service){
     return{
         restrict: 'EA',
