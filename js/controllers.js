@@ -33,7 +33,6 @@ app.controller("comparisonModalController", function($scope, $state, $http, GETS
       GETService.GET_Peliculas()
       .then(function(respuesta) {
         $scope.data_peliculas = respuesta.data;
-        console.log(respuesta.data);
       }, function(error){console.log(error)});
     }
     GET_Peliculas(GETService);
@@ -48,16 +47,13 @@ app.controller("searchResultsController", function($scope, $stateParams, $http, 
         .then(function(respuesta) {
 
             $scope.data_peliculas = respuesta.data;
-            console.log(respuesta.data);
         }, function(error){console.log(error)});
 
     }
     GET_Search_Results($stateParams.query, 3);
 
 
-    console.log($stateParams);
     $scope.query = $stateParams.query;
-    console.log($scope.query);
 });
 
 app.controller("searchController", function($scope, $state) {
@@ -80,7 +76,6 @@ app.controller("filmsController", function($scope, $http, GETService) {
     GETService.GET_Peliculas()
     .then(function(respuesta) {
       $scope.data_peliculas = respuesta.data;
-      console.log(respuesta.data);
     }, function(error){console.log(error)});
   }
   GET_Peliculas(GETService);
@@ -109,7 +104,6 @@ app.controller('editFormController', function($scope, $http) {
       };
     }
     delete pelicula['keyterms'];
-    console.log(pelicula);
     $scope.pelicula = angular.copy(pelicula);
     $scope.pelicula.genres = angular.copy(genre);
     $scope.pelicula.director = angular.copy(director);
@@ -133,7 +127,6 @@ app.controller('editFormController', function($scope, $http) {
     pelicula.imgId = parseInt(pelicula.imgId);
 
      var wat = JSON.stringify(pelicula);
-     console.log(wat);
      var req = {
      method: 'POST',
      url: 'http://131.221.33.124:8080/feelms/api/admin/update/film',
@@ -167,7 +160,6 @@ app.controller('addFormController', function($scope, $http) {
     to_list = to_list.split(",");
     pelicula.keywords = to_list;
     var wat = JSON.stringify(pelicula);
-    console.log(wat);
     var req = {
      method: 'POST',
      url: 'http://131.221.33.124:8080/feelms/api/admin/add/film',

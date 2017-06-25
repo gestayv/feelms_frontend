@@ -89,7 +89,7 @@ angular.module("feelms")
                             .append("circle")
                             .attr("r", circleRadius)
                             .attr("fill", circleColour)
-                            .on("click", redirectToUser);
+                            .on("click", redirectToNode);
 
 
 
@@ -112,7 +112,7 @@ angular.module("feelms")
 
                         zoom_handler(svg);
 
-                        function redirectToUser(d)
+                        function redirectToNode(d)
                         {
                             if(d.type == "u")
                             {
@@ -236,147 +236,163 @@ angular.module("feelms")
             }
         };
     }])
-.directive('graficoTweets', ["d3_v4Service", function(d3_v4Service){
-        return {
-            restrict: 'EA',
-            scope:{
-                film: '@'
-            },
-            link: function(scope, element, attrs)
-            {
-                var urlBase;
-                d3_v4Service.d3().then(function(d3)
-                {
 
-                    var width = 560, height = 360;
-
-                    var margin = {top: 20, right: 20, bottom: 30, left: 40};
-
-                    var svg = d3.select(element[0])
-                                .append('svg')
-                                .attr("padding", 0)
-                                .attr('width', 620)
-                                .attr('height', 420);
-
-                    // Se  define el parseador de fecha (se altera el original con uno para mostrar día - mes)
-
-                    var bisectDate = d3.bisector(function(d) { return d.year; }).left;
-                    var date_format = d3.timeFormat("%d %b");
+.directive('mapaTweets', ["d3_v4Service", function(d3_v4Service){
+    return{
+        restrict: 'EA',
+        scope:{},
+        link: function(scope, element, attrs)
+        {
+            var urlBase;
+            d3_v4Service.d3().then(function(d3){
 
 
-                    // Definimos la escala
-                    var x = d3.scaleTime().range([0, width]);
-                    var y = d3.scaleLinear().range([height, 0]);
-
-
-                    // labels (por estudiar)
-                    var g = svg.append("g")
-                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-                    scope.$watch('film', function (newVal) {
-
-                    urlBase = "http://131.221.33.124:8080/feelms/api/films/"+scope.film+"/tweets/count/7";
-                    // Moldeamos los datos de entrada
-                    d3.json(urlBase, function(error, data)
-                    {
-                        if (error) throw error;
-
-                        data.forEach(function(d) {
-                          var fecha = new Date(Date.parse(d.date));
-                          d.year = fecha;
-                          d.value = +d.count;
-                        });
-
-                        //Definimos la linea
-                        var line = d3.line()
-                        .x(function(d) { return x(d.year); })
-                        .y(function(d) { return y(d.value); });
-
-                        //Definimos los dominios de X e Y
-
-                        var minDate = data[0].year,
-                            maxDate = (data[data.length-1].year);
-
-                        //TODO : Falta implementar de que si la fecha de estreno está dentro del rango de tweets tomados, incrustar la fecha del estreno
-
-                        var x = d3.scaleTime().domain([minDate, maxDate]).range([0, width - 20 ]);
-                        var xAxis = d3.axisBottom()
-                              .scale(x)
-                              .tickFormat(date_format);
-
-
-                        y.domain([d3.min(data, function(d) { return d.value; }) / 1.005, d3.max(data, function(d) { return d.value; }) * 1.005]);
-
-                        //Definimos el estilo de los labes y el comportamiento del mouse sobre el gráfico
-
-                        g.append("g")
-                            .attr("class", "xaxis axis")
-                            .attr("transform", "translate(0," + height + ")")
-                                .call(xAxis)
-
-                        g.append("g")
-                            .attr("class", "axis axis--y")
-                            .call(d3.axisLeft(y).ticks(6).tickFormat(function(d) { return parseInt(d); }))
-                          .append("text")
-                            .attr("class", "axis-title")
-                            .attr("transform", "rotate(-90)")
-                            .attr("y", 6)
-                            .attr("dy", ".71em")
-                            .style("text-anchor", "end")
-                            .attr("fill", "#5D6971")
-                            .text("Cantidad de Tweets");
-
-                        g.append("path")
-                            .datum(data)
-                            .attr("class", "line")
-                            .attr("d", line);
-
-                        var focus = g.append("g")
-                            .attr("class", "focus")
-                            .style("display", "none");
-
-                        focus.append("line")
-                            .attr("class", "x-hover-line hover-line")
-                            .attr("y1", 0)
-                            .attr("y2", height);
-
-                        focus.append("line")
-                            .attr("class", "y-hover-line hover-line")
-                            .attr("x1", width)
-                            .attr("x2", width);
-
-                        focus.append("circle")
-                            .attr("r", 7.5);
-
-                        focus.append("text")
-                            .attr("x", 15)
-                            .attr("dy", ".31em");
-
-                        svg.append("rect")
-                            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                            .attr("class", "overlay")
-                            .attr("width", width)
-                            .attr("height", height)
-                            .on("mouseover", function() { focus.style("display", null); })
-                            .on("mouseout", function() { focus.style("display", "none"); })
-                            .on("mousemove", mousemove);
-
-                        function mousemove() {
-                            var x0 = x.invert(d3.mouse(this)[0]),
-                            i = bisectDate(data, x0, 1),
-                            d0 = data[i - 1],
-                            d1 = data[i];
-                            var d = x0 - d0.year > d1.year - x0 ? d1 : d0;
-                        focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")");
-                        focus.select("text").text(function() { return d.value; });
-                        focus.select(".x-hover-line").attr("y2", height - y(d.value));
-                        focus.select(".y-hover-line").attr("x2", width + width);
+                d3.json("./json_test/world-countries.json", function(err, data){
+                    var location = window.location.href;
+                    var test = location.split("/");
+                    var film = test[test.length-1];
+                    var urlBase = "http://131.221.33.124:8080/feelms/api/films/"+film+"/map/30";
+                    d3.json(urlBase, function(err2, data2){
+                        // Definir rangos y colores de manera dinámica.
+                        var mapa_labels = [];
+                        var ext_mapa_domain = [0];
+                        var valor;
+                        for (var i = 0; i < data2.range.length; i++)
+                        {
+                            if(i == 0)
+                            {
+                                valor = "< "+data2.range[i];
+                                mapa_labels.push(valor);
+                                ext_mapa_domain.push(data2.range[i]);
+                                valor = data2.range[i] + " +";
+                                mapa_labels.push(valor);
+                            }
+                            else if(i == data2.range.length - 1)
+                            {
+                                valor = "> "+data2.range[i];
+                                mapa_labels.push(valor);
+                                ext_mapa_domain.push(data2.range[i]);
+                            }
+                            else
+                            {
+                                valor = data2.range[i] + " +";
+                                mapa_labels.push(valor);
+                                ext_mapa_domain.push(data2.range[i]);
+                            }
                         }
-                    });// d3 json
-                });// test watch
-            });//Fin promesa d3
+
+                        var colorMap = d3.interpolateRgb("#C5ECFF", "#00557F");
+
+                        var color2 = d3.scaleLog()
+                            .domain(data2.range)
+                            .range(["#FFB6AF", "#B21100"]);
+
+                        var width = 960,
+                            height = 500;
+
+                        var zoom = d3.zoom()
+                            .scaleExtent([1, 8])
+                            .on("zoom", move);
+
+                        var svg = d3.select(element[0])
+                                    .append("svg")
+                                    .attr("class", "mapaT")
+                                    .attr("width", width)
+                                    .attr("height", height)
+                                    .call(zoom);
+
+                        var g = svg.append("g");
+
+                        var projection = d3.geoMercator()
+                                        .scale(width / 2 / Math.PI)
+                                        .translate([width/2, height/2]);
+
+                        var path = d3.geoPath()
+                                    .projection(projection);
+
+                        var countries = topojson.feature(data, data.objects.countries1).features;
+                        g.selectAll(".country")
+                            .data(countries)
+                            .enter().append("path")
+                            .attr("class", "country")
+                            .style("fill", testF)
+                            .attr("d", path)
+                            .on("mouseover", hover_on)
+                            .on("mousemove", hover_move)
+                            .on("mouseout", hover_out);
+
+                        function testF(d)
+                        {
+                            var t = data2["countryData"];
+                            for (var i = 0; i < t.length; i++) {
+                                if(d["properties"]["Alpha-2"] == t[i]["id"])
+                                {
+                                    return color2(t[i]["count"]);
+                                }
+                            }
+                            return "gray";
+                        }
+
+                        var legend = svg.selectAll(".legend")
+                            .data(ext_mapa_domain)
+                            .enter().append("g")
+                            .attr("class", "legend");
+
+                        var ls_w = 20, ls_h = 20;
+
+                        legend.append("rect")
+                            .attr("x", 20)
+                            .attr("y", function(d, i){ return height - (i*ls_h) - 2*ls_h;})
+                            .attr("width", ls_w)
+                            .attr("height", ls_h)
+                            .style("fill", function(d, i) { return color2(d); })
+                            .style("opacity", 0.8);
+
+                        legend.append("text")
+                            .attr("x", 50)
+                            .attr("y", function(d, i){ return height - (i*ls_h) - ls_h - 4;})
+                            .text(function(d, i){ return mapa_labels[i]; });
+
+                        var tooltip = d3.select("body")
+                            .append("div")
+                            .style("position", "absolute")
+                            .style("z-index", "10")
+                            .style("visibility", "hidden")
+                            .attr("id", "rcorners6");
+
+                        function hover_on(d)
+                        {
+                            var props= d["properties"];
+                            return tooltip
+                                    .text(props["name"]+" !")
+                                    .style("visibility", "visible");
+                        }
+
+                        function hover_move(d)
+                        {
+                            var m = [0, 0];
+                            m = d3.mouse(this);
+                            return tooltip.style("top",
+                                    (d3.event.y)+"px").style("left",(d3.event.x)+"px");
+                        }
+
+                        function hover_out(d)
+                        {
+                            return tooltip
+                                    .style("visibility", "hidden");
+                        }
+
+                        function move()
+                        {
+                            g.attr("transform", d3.event.transform);
+                        }
+                    })
+                })
+            });
         }
     };
 }])
+
 .directive('graficoDep', ['d3v3','nv', function(d3v3, nv) {
     return {
         restrict: 'EA',
@@ -385,10 +401,12 @@ angular.module("feelms")
         },
         link: function(scope, element, attrs)
         {
+
             d3v3.d3().then(function(d3)
             {
                 if(true)
                 {
+                    //Resolver conflicto
 
                     nv.nv().then(function(nv)
                     {
@@ -398,16 +416,12 @@ angular.module("feelms")
 
                         if(true)
                         {
-
-
                             d3.json(urlBase, function(error, data1) {
 
                             var dataG= [];
                             var data = [];
 
                             dataG = data1;
-                            console.log("datos");
-                            console.log(dataG);
                             if(true)
                             {
 
@@ -477,133 +491,7 @@ angular.module("feelms")
         }
     } // return
 }])
-.directive('mapaTweets', ["d3_v4Service", function(d3_v4Service){
-    return{
-        restrict: 'EA',
-        scope:{},
-        link: function(scope, element, attrs)
-        {
-            var urlBase;
-            d3_v4Service.d3().then(function(d3){
 
-                // Definir rangos y colores de manera dinámica.
-                var color_domain = [50, 150, 350, 750, 1500]
-                var ext_color_domain = [0, 50, 150, 350, 750, 1500]
-                var legend_labels = ["< 50", "50+", "150+", "350+", "750+", "> 1500"]
-                var color = d3.scaleThreshold()
-                    .domain(color_domain)
-                    .range(["#adfcad", "#ffcb40", "#ffba00", "#ff7d73", "#ff4e40", "#ff1300"]);
-
-                var width = 960,
-                    height = 500;
-
-                var zoom = d3.zoom()
-                    .scaleExtent([1, 8])
-                    .on("zoom", move);
-
-                var svg = d3.select(element[0])
-                            .append("svg")
-                            .attr("class", "mapaT")
-                            .attr("width", width)
-                            .attr("height", height)
-                            .call(zoom);
-
-                var g = svg.append("g");
-
-                var projection = d3.geoMercator()
-                                .scale(width / 2 / Math.PI)
-                                .translate([width/2, height/2]);
-
-                var path = d3.geoPath()
-                            .projection(projection);
-
-                d3.json("./json_test/world-countries.json", function(err, data){
-
-                    d3.json("./json_test/test.json", function(err2, data2){
-                        var countries = topojson.feature(data, data.objects.countries1).features;
-                        g.selectAll(".country")
-                            .data(countries)
-                            .enter().append("path")
-                            .attr("class", "country")
-                            .style("fill", testF)
-                            .attr("d", path)
-                            .on("mouseover", hover_on)
-                            .on("mousemove", hover_move)
-                            .on("mouseout", hover_out);
-
-                        function testF(d)
-                        {
-                            var t = data2["paises"];
-                            for (var i = 0; i < t.length; i++) {
-                                if(d["properties"]["Alpha-2"] == t[i]["id"])
-                                {
-                                    console.log(t[i]["fill"])
-                                    return t[i]["fill"];
-                                }
-                            }
-                            return "#efefef";
-                        }
-
-                        var legend = svg.selectAll(".legend")
-                            .data(ext_color_domain)
-                            .enter().append("g")
-                            .attr("class", "legend");
-
-                        var ls_w = 20, ls_h = 20;
-
-                        legend.append("rect")
-                            .attr("x", 20)
-                            .attr("y", function(d, i){ return height - (i*ls_h) - 2*ls_h;})
-                            .attr("width", ls_w)
-                            .attr("height", ls_h)
-                            .style("fill", function(d, i) { return color(d); })
-                            .style("opacity", 0.8);
-
-                        legend.append("text")
-                            .attr("x", 50)
-                            .attr("y", function(d, i){ return height - (i*ls_h) - ls_h - 4;})
-                            .text(function(d, i){ return legend_labels[i]; });
-                    })
-                })
-
-                var tooltip = d3.select("body")
-                    .append("div")
-                    .style("position", "absolute")
-                    .style("z-index", "10")
-                    .style("visibility", "hidden")
-                    .attr("id", "rcorners6");
-
-                function hover_on(d)
-                {
-                    var props= d["properties"];
-                    return tooltip
-                            .text(props["name"]+" !")
-                            .style("visibility", "visible");
-                }
-
-                function hover_move(d)
-                {
-                    var m = [0, 0];
-                    m = d3.mouse(this);
-                    return tooltip.style("top",
-                            (d3.event.y)+"px").style("left",(d3.event.x)+"px");
-                }
-
-                function hover_out(d)
-                {
-                    return tooltip
-                            .style("visibility", "hidden");
-                }
-
-                function move()
-                {
-                    g.attr("transform", d3.event.transform);
-                }
-
-            });
-        }
-    };
-}])
 .directive('graficotorta', ['d3v3','nv', function(d3v3, nv) {
         return {
             restrict: 'EA',
@@ -646,6 +534,7 @@ angular.module("feelms")
                                           .x(function(d) { return d.label })
                                           .y(function(d) { return d.value })
                                           .showLabels(true)
+                                          .labelType("percent")
                                           .color(['green', 'red', 'gray']);
 
                                         d3.select("#chart1 svg")
