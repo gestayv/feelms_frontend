@@ -1,0 +1,84 @@
+.link line {
+	stroke: #999;
+	stroke-opacity: 0.6;
+}
+
+.node circle {
+	stroke: #000000;
+	stroke-width: 1px;
+}
+
+.node text{
+	fill: #000;
+	font-family: Helvetica
+}
+
+.legend rect {
+  fill:white;
+  stroke:black;
+  opacity:0.8;
+}
+
+#borde {
+	border: 2px solid black;
+	margin:	auto;
+	background-color: #4db6ac;
+}
+
+#rcorners6{
+    border-radius: 15px 15px;
+    border: 1px solid black;
+    background: #fff;
+    padding: 10px;
+    width: auto;
+    height: auto;
+    overflow: auto;
+    white-space: pre;
+}
+
+body {
+  background-color: #F1F3F3
+}
+.axis {
+	font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #0B7FBA;
+  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
+
+.line {
+  fill: none;
+  stroke: #00FFF7;
+  stroke-width: 5px;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: #F1F3F3;
+  stroke: #00FFF7;
+  stroke-width: 5px;
+}
+
+.hover-line {
+  stroke: #00FFF7;
+  stroke-width: 2px;
+  stroke-dasharray: 3,3;
+}
+
+#chart svg {
+	overflow:auto;
+	height: 400px;
+}
+
+#chart1 svg {
+  height: 400px;
+}

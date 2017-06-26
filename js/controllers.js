@@ -367,3 +367,27 @@ app.directive('footerSection', function() {
         templateUrl: 'html/footer-section.html'
     };
 });
+
+app.controller('loginController', function($scope, $http) {
+    $scope.login_in = function(login) {
+      console.log("ADASD");
+      console.log(login.user);
+      console.log(login.pass);  
+
+
+      var req = {
+       method: 'POST',
+       url: 'http://131.221.33.124:8080/feelms/api/admin/login/'+login.user+'/'+login.pass,
+       headers: {
+         'Content-Type': 'application/json'
+       },
+       data: $scope.master
+      }
+      $http(req).then(function(response){
+        console.log(response);
+
+      }, function(response){
+        console.log(response);
+      });
+    };
+});

@@ -70,14 +70,21 @@
     </nav>
     <div ui-view autoscroll='true'></div>
     <!-- Modal Login -->
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal fade" id="login-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
           <div class="modal-dialog">
                 <div class="loginmodal-container">
                     <h1>Ingrese a su cuenta</h1><br>
-                  <form>
-                    <input type="text" name="user" placeholder="Usuario">
-                    <input type="password" name="pass" placeholder="Password">
-                    <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+                    <div class="tab-content">
+                    <ng-form ng-submit="login_in(login)" class="form-horizontal" ng-controller="loginController" name="myForm">
+                    <input type="text" name="user" placeholder="Usuario" ng-model="login.user" required>
+                    <span style="color:red" ng-show="myForm.user.$pristine && myForm.user.$touched">
+                        <span ng-show="myForm.user.$error.required">Por favor ingresar Usuario.</span>
+                    </span>
+                    <input type="password" name="pass" placeholder="Password" ng-model="login.pass" required>
+                    <span style="color:red" ng-show="myForm.pass.$pristine && myForm.pass.$touched">
+                        <span ng-show="myForm.pass.$error.required">Por favor ingresar la contraseña.</span>
+                    </span>
+                    <button type="submit" class="btn btn-primary" ng-click="login_in(login)">Login</button>
                   </form>
                 </div>
             </div>
