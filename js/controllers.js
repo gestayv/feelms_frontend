@@ -368,15 +368,18 @@ app.directive('footerSection', function() {
     };
 });
 
-app.controller('loginController', function($scope, $http) {
+
+
+app.controller("adminViewController", function($scope, $state) {
+    $scope.showAdminView = function() {
+        $state.go("admin");
+    }
+});
+
+app.controller('loginController', function($scope,$state, $http) {
     $scope.login_in = function(login) {
-      console.log("ADASD");
-      console.log(login.user);
-      console.log(login.pass);  
-
-
       var req = {
-       method: 'POST',
+       method: 'GET',
        url: 'http://131.221.33.124:8080/feelms/api/admin/login/'+login.user+'/'+login.pass,
        headers: {
          'Content-Type': 'application/json'
@@ -384,7 +387,18 @@ app.controller('loginController', function($scope, $http) {
        data: $scope.master
       }
       $http(req).then(function(response){
-        console.log(response);
+
+        if(response.data.id != -1)
+        {
+          console.log("Login correcto");
+
+          $state.go("admin");
+          $("#login-modal").modal("toggle");
+        }
+        else
+        {
+          alert("Usuario no registrado");
+        }
 
       }, function(response){
         console.log(response);

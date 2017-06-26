@@ -76,6 +76,8 @@
                     <h1>Ingrese a su cuenta</h1><br>
                     <div class="tab-content">
                     <ng-form ng-submit="login_in(login)" class="form-horizontal" ng-controller="loginController" name="myForm">
+
+                    <fieldset>
                     <input type="text" name="user" placeholder="Usuario" ng-model="login.user" required>
                     <span style="color:red" ng-show="myForm.user.$pristine && myForm.user.$touched">
                         <span ng-show="myForm.user.$error.required">Por favor ingresar Usuario.</span>
@@ -84,6 +86,7 @@
                     <span style="color:red" ng-show="myForm.pass.$pristine && myForm.pass.$touched">
                         <span ng-show="myForm.pass.$error.required">Por favor ingresar la contraseña.</span>
                     </span>
+                    </fieldset>
                     <button type="submit" class="btn btn-primary" ng-click="login_in(login)">Login</button>
                   </form>
                 </div>
