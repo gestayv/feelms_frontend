@@ -81,6 +81,57 @@ app.controller("filmsController", function($scope, $http, GETService) {
   GET_Peliculas(GETService);
 });
 
+app.controller("subscribeController", function($scope, $http) {
+    $scope.send = function(suscriptor) {
+        var datos = JSON.stringify(suscriptor);
+        console.log(datos);
+        var req = {
+            method: 'POST',
+            url: 'http://131.221.33.124:8080/feelms/api/news/suscribe',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: datos
+        }
+        $http(req).then(function(response){
+            console.log(response);
+        }, function(response){
+            console.log(response);
+        });
+        $("#confirmacion1").modal('show');
+        if($scope.suscriptor.first_name != null) {
+            $scope.suscriptor.first_name = null;
+        }
+        if($scope.suscriptor.last_name != null) {
+            $scope.suscriptor.last_name = null;
+        }
+        if($scope.suscriptor.mail != null) {
+            $scope.suscriptor.mail = null;
+        }
+    };
+
+    $scope.unsuscribe = function(suscriptor) {
+        $("#cancelar").modal('hide');
+        $('.modal-backdrop').hide();
+        var datos = JSON.stringify(suscriptor);
+        console.log(datos);
+        var req = {
+            method: 'POST',
+            url: 'http://131.221.33.124:8080/feelms/api/news/unsuscribe',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: datos
+        }
+        $http(req).then(function(response){
+            console.log(response);
+        }, function(response){
+            console.log(response);
+        });
+        $("#confirmacion2").modal('show');
+    };
+});
+
 app.controller('editFormController', function($scope, $http) {
   $scope.pelicula = {};
   $scope.master = {};

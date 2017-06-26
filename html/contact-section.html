@@ -1,5 +1,5 @@
 <section id="contact">
-    <div class="container">
+    <div class="container" ng-controller="subscribeController">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2>Suscríbete</h2>
@@ -8,23 +8,23 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                <form id="contactForm" name="sentMessage" novalidate>
+                 <form id="suscription" name="newsletter" novalidate>
                     <div class="row control-group">
                         <div class="form-group col-xs-6 floating-label-form-group controls">
-                            <label for="name">Nombre</label>
-                            <input type="text" class="form-control" placeholder="Nombre" id="name" required data-validation-required-message="Por favor ingresa tu nombre.">
+                            <label for="first_name">Nombre</label>
+                            <input type="text" class="form-control" placeholder="Nombre" id="first_name" ng-model="suscriptor.first_name" required data-validation-required-message="Porfavor ingresa tu nombre.">
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="form-group col-xs-6 floating-label-form-group controls">
-                            <label for="name">Apellido</label>
-                            <input type="text" class="form-control" placeholder="Apellido" id="lastname" required data-validation-required-message="Por favor ingresa tu apellio.">
+                            <label for="last_name">Apellido</label>
+                            <input type="text" class="form-control" placeholder="Apellido" id="last_name" ng-model="suscriptor.last_name" required data-validation-required-message="Porfavor ingresa tu apellido.">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label for="email">Email Address</label>
-                            <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Por favor ingresa tu correo electrónico.">
+                            <input type="email" class="form-control" placeholder="Email" id="email" ng-model="suscriptor.mail" required data-validation-required-message="Please enter your email address.">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
@@ -32,11 +32,84 @@
                     <div id="success"></div>
                     <div class="row">
                         <div class="form-group col-xs-12">
-                            <button type="submit" class="btn btn-success btn-lg">Enviar</button>
+                            <button type="submit" class="btn btn-success btn-lg" ng-click="send(suscriptor)">Send</button>
                         </div>
                     </div>
+                    Para cancelar su suscripción, clic <a data-toggle="modal" href="#cancelar">aquí</a>
                 </form>
             </div>
         </div>
-    </div>
+        <div id="cancelar" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="col-lg-12 text-center">
+                    <h2>Desinscripción</h2>
+                    <hr class="star-primary"></hr>
+                </div>
+              </div>
+              <div class="modal-body">
+                  <form id="unsuscription" name="cancelar" novalidate>
+                      <div class="row">
+                        <div class="form-group">
+                          <div class="form-group col-xs-8 floating-label-form-group controls">
+                              <label for="mail1">Mail</label>
+                              <input type="text" class="form-control" placeholder="Ingrese su mail" id="mail1" ng-model="cliente.mail" required data-validation-required-message="Porfavor ingresa tu Correo.">
+                              <p class="help-block text-danger"></p>
+                          </div>
+                        </div>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="pull-right btn btn-success" data-toggle="collapse" ng-click="unsuscribe(cliente)">Enviar</button>
+                <button type="button" class="pull-left btn btn-success" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="confirmacion1" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="col-lg-12 text-center">
+                    <h2>Suscripción</h2>
+                    <hr class="star-primary"></hr>
+                </div>
+              </div>
+              <div class="modal-body">
+                  <p>Felicidades! Te has suscrito a nuestro Newsletter. Revisa tu correo regularmente para obtener todas las actualizaciones y novedades de nuestra web.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="pull-right btn btn-success" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="confirmacion2" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="col-lg-12 text-center">
+                    <h2>Suscripción</h2>
+                    <hr class="star-primary"></hr>
+                </div>
+              </div>
+              <div class="modal-body">
+                  <p>Que lástima que nos dejes :(</p>
+                  <p>Puedes volver cuando quieras, te esperamos!!</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="pull-right btn btn-success" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </section>

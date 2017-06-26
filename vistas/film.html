@@ -106,8 +106,6 @@
                                 <select class="form-control" name="films" ng-model="secondID">
                                   <option ng-repeat="film in data_peliculas" value="{{film.id}}">{{film.title}}</option>
                                 </select><br>
-                                {{firstID}}
-                                {{secondID}}
                                 <button type="button" class="pull-right btn btn-success" data-toggle="collapse" ng-click="comparisonView(firstID,secondID)">Comparar</button>
                               </div>
                             </div>
